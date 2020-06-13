@@ -6,7 +6,6 @@ doc/
 
 # IntelliJ files
 .idea/
-out/
 *.iml
 
 # Eclipse files
