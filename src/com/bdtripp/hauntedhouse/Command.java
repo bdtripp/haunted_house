@@ -1,7 +1,5 @@
 package com.bdtripp.hauntedhouse;
 
-//TODO add description of how to use the command to this class. This info will be displayed when the hlp command is run.
-
 /**
  * This class is part of the "World of Zuul" application.
  * "World of Zuul" is a very simple, text based adventure game.

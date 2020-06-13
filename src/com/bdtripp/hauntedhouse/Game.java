@@ -168,7 +168,7 @@ public class Game
         System.out.println("Haunted House is a spooky adventure game.");
         System.out.println("Those who enter may never escape.");
         System.out.println("Find the exit and you just might survive.");
-        System.out.println("Type \"help\" if you need help.");
+        System.out.println("Use the \"help\" command if you need help.");
         System.out.println();
         printRoomDetails();
     }
@@ -254,13 +254,82 @@ public class Game
     private void printHelp()
     {
         System.out.println("Your command words are:");
-        System.out.println(parser.getCommands());
-        System.out.println("To move, type \"go\" + \"space\" + \"a direction\"");
-        System.out.println("Directions are north, south, east, or west");
-        System.out.println("To give an item to a character, type \"give\" + \"space\" + \"the name of the item you want" +
-                " to give\" + \"space\" + \"the name of the character you want to give it to\"");
-        System.out.println("Your command words are:");
-        System.out.println("To exit the game, type \"quit\"");
+        System.out.println(parser.getCommands() + "\n");
+
+        System.out.println("How to use the commands: \n");
+
+        System.out.println("go: Use to move from room to room");
+        System.out.println("Usage: type \"go\" + \"space\" + \"a direction\"");
+        System.out.println("Hint(s): Directions are north, south, east, or west\n");
+
+        System.out.println("quit: Use to quit the program");
+        System.out.println("Usage: type \"quit\"");
+        System.out.println("Hint(s): N/A\n");
+
+        System.out.println("help: Use to get information on how to play the game ");
+        System.out.println("Usage: type \"help\"");
+        System.out.println("Hint(s): N/A\n");
+
+        System.out.println("look: Use to get a description of your location and directions that you are able to travel in");
+        System.out.println("Usage: type \"look\"");
+        System.out.println("Hint(s): N/A\n");
+
+        System.out.println("eat: Use to eat an item. Eating an item can boost your stats. Not all items are edible.");
+        System.out.println("Usage: type \"eat\" + \"space\" + \"the name of the item you want to eat\"");
+        System.out.println("Hint(s): example command - \"eat potion\"\n");
+
+        System.out.println("back: Use to backtrack consecutively through the rooms that you were just in");
+        System.out.println("Usage: type \"back\"");
+        System.out.println("Hint(s): N/A\n");
+
+        System.out.println("take: If you find an item in a room, you can use the \"take\" command to pick up the item");
+        System.out.println("Usage: type \"take\" + \"space\" + \"the name of the item you want to pick up\"");
+        System.out.println("Hint(s): N/A\n");
+
+        System.out.println("drop: Use to drop an item that you are carrying.");
+        System.out.println("Usage: type \"drop\" + \"space\" + \"the name of the item you want to drop\"");
+        System.out.println("Hint(s): You may want to drop an item since you can only carry so much weight\n");
+
+        System.out.println("items: Use to print a list of items that you are carrying and descriptions of each item");
+        System.out.println("Usage: type \"items\"");
+        System.out.println("Hint(s): N/A\n");
+
+        System.out.println("stats: Use to print a list of the players current stats");
+        System.out.println("Usage: type \"stats\"");
+        System.out.println("Hint(s): This command will display information such as health, strength, and maximum carry weight.\n");
+
+        System.out.println("charge: Use to charge an item");
+        System.out.println("Usage: type \"charge\" + \"space\" + \"the name of the item you want to charge\"");
+        System.out.println("Hint(s): You will need to charge your beamer before firing it. " +
+                "Charge the beamer in a room that you want to use as a return point. Later when you fire the beamer, " +
+                "it will send you back to the room that you charged it in originally.\n"
+        );
+
+        System.out.println("fire: ");
+        System.out.println("Usage: type \"fire\" + \"space\" + \"the name of the item you want to fire\"");
+        System.out.println("Hint(s): You will need to charge your beamer before firing it. " +
+                "Charge the beamer in a room that you want to use as a return point. Later when you fire the beamer, " +
+                "it will send you back to the room that you charged it in originally.\n"
+        );
+
+        System.out.println("talk: If there is a character in a room, you can use this command to talk to them.");
+        System.out.println("Usage: type \"talk\" + \"space\" + \"the name of the person you want to talk to\"");
+        System.out.println("Hint(s): N/A\n");
+
+        System.out.println("give: Use to give an item to a Character");
+        System.out.println("Hint(s): Certain characters will give you a reward in exchange for giving them an item that you found. " +
+                "You must be in the same room as the Character that you want to give an item to.\n"
+        );
+
+
+
+
+//        System.out.println("To move, type \"go\" + \"space\" + \"a direction\"");
+//        System.out.println("Directions are north, south, east, or west");
+//        System.out.println("To give an item to a character, type \"give\" + \"space\" + \"the name of the item you want" +
+//                " to give\" + \"space\" + \"the name of the character you want to give it to\"");
+//        System.out.println("Your command words are:");
+//        System.out.println("To exit the game, type \"quit\"");
     }
 
     /**
