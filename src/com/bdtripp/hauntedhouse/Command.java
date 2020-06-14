@@ -1,22 +1,22 @@
 package com.bdtripp.hauntedhouse;
 
 /**
- * This class is part of the "World of Zuul" application.
- * "World of Zuul" is a very simple, text based adventure game.
+ * This class is part of the "Haunted House" application.
+ * "Haunted House" is a text based adventure game.
  *
  * This class holds information about a command that was issued by the user.
- * A command currently consists of two strings: a command word and a second
- * word (for example, if the command was "take map", then the two strings
- * obviously are "take" and "map").
+ * A command currently consists of three strings: a command word, a second
+ * word, and a third word (for example, if the command was "give spade Beatrice", then the three strings
+ * obviously are "give", "spade", and "Beatrice).
  *
  * The way this is used is: Commands are already checked for being valid
  * command words. If the user entered an invalid command (a word that is not
  * known) then the command word is <null>.
  *
- * If the command had only one word, then the second word is <null>.
+ * If the command had only one word, then the second and third words are <null>.
  *
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Michael Kölling and David J. Barnes, Brian Tripp
+ * @version 2020.06.13
  */
 
 public class Command

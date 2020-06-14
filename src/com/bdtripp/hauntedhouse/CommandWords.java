@@ -2,13 +2,13 @@ package com.bdtripp.hauntedhouse;
 
 /**
  * This class is part of the "Haunted House" application.
- * "Haunted House" is a very simple, text based adventure game.
+ * "Haunted House" is a text based adventure game.
  *
  * This class holds an enumeration of all command words known to the game.
  * It is used to recognise commands as they are typed in.
  *
  * @author  Michael Kölling, David J. Barnes, and Brian Tripp
- * @version 2019.01.12
+ * @version 2020.06.13
  */
 
 public class CommandWords

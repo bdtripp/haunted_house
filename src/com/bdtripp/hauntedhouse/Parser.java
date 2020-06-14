@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 /**
  * This class is part of the "Haunted House" application.
- * "Haunted House" is a very simple, text based adventure game.
+ * "Haunted House" is a text based adventure game.
  *
- * This parser reads user input and tries to interpret it as an "Adventure"
+ * This parser reads user input and tries to interpret it as a
  * command. Every time it is called it reads a line from the terminal and
- * tries to interpret the line as a two word command. It returns the command
+ * tries to interpret the line as a three word command. It returns the command
  * as an object of class Command.
  *
  * The parser has a set of known command words. It checks user input against
@@ -16,7 +16,7 @@ import java.util.Scanner;
  * returns a command object that is marked as an unknown command.
  *
  * @author  Michael Kölling, David J. Barnes, and Brian Tripp
- * @version 2019.01.11
+ * @version 2020.06.13
  */
 public class Parser
 {

@@ -4,13 +4,13 @@ package com.bdtripp.hauntedhouse;
  * Class Item - an item in the haunted house.
  *
  * This class is part of the "Haunted House" application.
- * "Haunted House" is a very simple, text based adventure game.
+ * "Haunted House" is a text based adventure game.
  *
  * A "Item" represents an object that can be found. Items will help the player
  * in various ways. Some items may be too heavy to pick up.
  *
  * @author Brian Tripp
- * @version 2019.01.13
+ * @version 2020.06.13
  */
 public class Item
 {

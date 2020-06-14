@@ -5,7 +5,7 @@ package com.bdtripp.hauntedhouse;
  * executed when the game is run.
  *
  * @author Brian Tripp
- * @version 2019.01.19
+ * @version 2020.06.13
  */
 public class HauntedHouse
 {

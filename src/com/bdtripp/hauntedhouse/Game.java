@@ -1,24 +1,21 @@
 package com.bdtripp.hauntedhouse;
-//TODO add descriptions of how to use each command in the help section
 
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *  This class is the main class of the "Haunted House" application.
+ *  This is the Game Class of the "Haunted House" application.
+ *
  *  "Haunted House" is a text based adventure game in which the user can
  *  explore rooms in a haunted house. The goal of the game is to try to find
  *  your way out of the house.
- *
- *  To play this game, create an instance of this class and call the "play"
- *  method.
  *
  *  This main class creates and initialises all the others: it creates all
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  *
  * @author  Michael Kölling, David J. Barnes, and Brian Tripp
- * @version 2019.01.13
+ * @version 2020.06.13
  */
 
 public class Game
@@ -544,7 +541,6 @@ public class Game
         }
     }
 
-    //TODO make sure to upload map to github
     /**
      * Fires the beamer. Returns the player to the location at which the
      * beamer was last charged.

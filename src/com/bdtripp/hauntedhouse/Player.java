@@ -6,13 +6,13 @@ import java.util.Stack;
  * Class Player - a player in the game.
  *
  * This class is part of the "Haunted House" application.
- * "Haunted House" is a very simple, text based adventure game.
+ * "Haunted House" is a text based adventure game.
  *
- * A "Player" represents a player in the game and keeps track of where the player is
- * and what items they are carrying.
+ * A "Player" represents a player in the game and keeps track of where the player is, what items they are carrying,
+ * and their current stats.
  *
  * @author  Brian Tripp
- * @version 2019.01.13
+ * @version 2020.06.13
  */
 public class Player
 {

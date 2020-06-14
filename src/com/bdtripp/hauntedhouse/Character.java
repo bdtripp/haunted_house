@@ -4,13 +4,13 @@ package com.bdtripp.hauntedhouse;
  * Class Character - a character in the haunted house.
  *
  * This class is part of the "Haunted House" application.
- * "Haunted House" is a very simple, text based adventure game.
+ * "Haunted House" is a text based adventure game.
  *
  * A "Character" represents a character that the player can interact with.
  * A character may offer to help the player in exchange for certain items.
  *
  * @author Brian Tripp
- * @version 2019.01.19
+ * @version 2020.06.13
  */
 public class Character
 {
@@ -23,8 +23,10 @@ public class Character
     /**
      * Constructor for objects of class Character
      * @param name The name of the character
-     * @param dialog The dialog that the character speaks
+     * @param initialDialog The initial dialog that the character speaks
+     * @param acceptanceDialog The dialog that the character speaks upon accepting an item
      * @param itemSought The name of the item that the character is seeking
+     * @param itemForReward The item that the character rewards the player with
      */
     public Character(
             String name,
