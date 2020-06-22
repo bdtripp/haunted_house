@@ -11,7 +11,7 @@ After you click the "Run on Repl.it" you will see a list of files.  Select haunt
 
 **Short list of commands to get you started:**  
 
-Help: use to get info on how to play the game and a list of all the commands  
+help: use to get info on how to play the game and a list of all the commands  
 
 look: Use to get a description of your location and directions that you are able to travel in  
 
