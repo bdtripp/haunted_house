@@ -212,7 +212,7 @@ public class Room
     public Character getCharacter(String name)
     {
         for(Character character : characters) {
-            if(character.getName().equals(name)) {
+            if(character.getName().toLowerCase().equals(name.toLowerCase())) {
                 return character;
             }
         }

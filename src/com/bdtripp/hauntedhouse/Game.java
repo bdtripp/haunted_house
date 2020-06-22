@@ -317,16 +317,6 @@ public class Game
         System.out.println("Hint(s): Certain characters will give you a reward in exchange for giving them an item that you found. " +
                 "You must be in the same room as the Character that you want to give an item to.\n"
         );
-
-
-
-
-//        System.out.println("To move, type \"go\" + \"space\" + \"a direction\"");
-//        System.out.println("Directions are north, south, east, or west");
-//        System.out.println("To give an item to a character, type \"give\" + \"space\" + \"the name of the item you want" +
-//                " to give\" + \"space\" + \"the name of the character you want to give it to\"");
-//        System.out.println("Your command words are:");
-//        System.out.println("To exit the game, type \"quit\"");
     }
 
     /**
