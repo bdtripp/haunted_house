@@ -8,7 +8,7 @@ Click the link below to run the program on repl.it:
 
 [![Run on Repl.it](https://repl.it/badge/github/bdtripp/haunted_house)](https://repl.it/github/bdtripp/haunted_house)  
 
-After you click the "Run on repl.it button":  
+After you click the "run on repl.it" button:  
 
 1. In the upper right-hand corner of the screen you will see a place to "configure the run button". Here enter the text "java -jar out/artifacts/Haunted_House_jar/haunted_house.jar" 
 2. Click "Done" 
