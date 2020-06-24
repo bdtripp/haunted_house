@@ -2,11 +2,17 @@
 Haunted House is a text based adventure game in which the user can explore rooms in a haunted house. The goal of the game is to try to find your way out of the house.  
 
 **Languages:**
-Written in Java.  
+Written in Java.
+
+Click the link below to run the program on Repl.it:
 
 [![Run on Repl.it](https://repl.it/badge/github/bdtripp/haunted_house)](https://repl.it/github/bdtripp/haunted_house)  
 
-After you click the "Run on Repl.it", in the upper right-hand corner of the screen you will see a place to "configure the run button". Here enter the text "java -jar out/artifacts/Haunted_House_jar/haunted_house.jar" and click "Done". Then, click the "Run" button at the top of the screen. The game will now be running in the bottom right-hand side of the screen. Enter a command in the console to begin playing. 
+After you click the "Run on Repl.it":  
+
+1. In the upper right-hand corner of the screen you will see a place to "configure the run button". Here enter the text "java -jar out/artifacts/Haunted_House_jar/haunted_house.jar" 
+2. Click "Done" 
+3. Click the "Run" button at the top of the screen. The game will now be running in the lower right-hand side of the screen. Enter a command in the console to begin playing. 
 
 To view a map of the haunted house, select haunted_house_map.pdf or .png on the left side of the screen.  
 
