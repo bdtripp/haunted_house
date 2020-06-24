@@ -4,6 +4,8 @@ Haunted House is a text based adventure game in which the user can explore rooms
 **Languages:**
 Written in Java.
 
+## Play Haunted House
+
 Click the link below to run the program on repl.it:
 
 [![Run on Repl.it](https://repl.it/badge/github/bdtripp/haunted_house)](https://repl.it/github/bdtripp/haunted_house)  
