@@ -12,7 +12,8 @@ After you click the "run on repl.it" button:
 
 1. In the upper right-hand corner of the screen you will see a place to "configure the run button". Here enter the text "java -jar out/artifacts/Haunted_House_jar/haunted_house.jar" 
 2. Click "Done" 
-3. Click the "Run" button at the top of the screen. The game will now be running in the lower right-hand side of the screen. Enter a command in the console to begin playing. 
+3. Click the "Run" button at the top of the screen. The game will now be running in the lower right-hand side of the screen. 
+4. Enter a command in the console to begin playing. 
 
 To view a map of the haunted house, select haunted_house_map.pdf or .png on the left side of the screen.  
 
