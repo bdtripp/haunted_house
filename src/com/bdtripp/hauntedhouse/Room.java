@@ -25,7 +25,7 @@ public class Room
     private ArrayList<Character> characters;
 
     /**
-     * Create a room described "description". Initially, it has
+     * Create a room. Initially, it has
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param description The room's description.

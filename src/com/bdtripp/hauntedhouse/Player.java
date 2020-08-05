@@ -55,6 +55,14 @@ public class Player
     public boolean getBeamerCharge() {
         return beamerCharged;
     }
+    
+    /**
+     * Set the maximum weight that the player can carry at a time
+     */
+    public void setMaxCarryWeight(int max)
+    {
+        maxCarryWeight = max;
+    }
 
     /**
      * Get the maximum weight that the player can carry at a time
@@ -63,14 +71,6 @@ public class Player
     public int getMaxCarryWeight()
     {
         return maxCarryWeight;
-    }
-
-    /**
-     * Set the maximum weight that the player can carry at a time
-     */
-    public void setMaxCarryWeight(int max)
-    {
-        maxCarryWeight = max;
     }
 
     /**
