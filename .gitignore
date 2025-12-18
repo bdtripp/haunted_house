@@ -13,3 +13,9 @@ bin/
 .settings/
 .recommenders/
 RemoteSystemsTempFiles/
+
+# IntelliJ build output
+out/
+
+# Generated Javadoc
+doc/
