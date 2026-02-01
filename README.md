@@ -9,6 +9,8 @@ Haunted House is a text based adventure game in which the user can explore rooms
 
 Click the link below to run the program on repl.it:
 
+[![Run on Replit](https://replit.com)](https://replit.com/@BrianTripp/Haunted-House)
+
 [![Run on Repl.it](https://repl.it/badge/github/bdtripp/haunted_house)](https://repl.it/github/bdtripp/haunted_house)  
 
 After you click the "run on repl.it" button:  
