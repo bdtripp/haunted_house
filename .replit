@@ -1,0 +1,1 @@
+run = "javac src/*.java && java com.bdtripp.hauntedhouse.HauntedHouse"
