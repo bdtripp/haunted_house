@@ -1,8 +1,6 @@
-run = "cd src && javac *.java && java com.bdtripp.hauntedhouse.HauntedHouse"
+run = "cd src && javac com/bdtripp/hauntedhouse/*.java && java com.bdtripp.hauntedhouse.HauntedHouse"
 
-# In your .replit file
 [workflows]
-# Define a specific workflow with a custom name
   [workflows.haunted_house]
   name = "Haunted House"
-  command = "cd src && javac *.java && java com.bdtripp.hauntedhouse.HauntedHouse"
+  command = "cd src && javac com/bdtripp/hauntedhouse/*.java && java com.bdtripp.hauntedhouse.HauntedHouse"
