@@ -1,3 +1,5 @@
+guest_forking = true
+
 run = "cd src && javac com/bdtripp/hauntedhouse/*.java && java com.bdtripp.hauntedhouse.HauntedHouse"
 
 [workflows]
