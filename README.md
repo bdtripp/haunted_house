@@ -9,7 +9,7 @@ Haunted House is a text based adventure game in which the user can explore rooms
 
 Click the link below to run the program on repl.it:
 
-[![Run on Replit](https://replit.com/badge/github/bdtripp/haunted_house)](https://replit.com/@BrianTripp/hauntedhouse-1?v=1)
+[![Run on Replit](https://replit.com/badge/github/bdtripp/haunted_house)](https://replit.com/@BrianTripp/hauntedhouse-1)
 
 After you click the "run on repl.it" button:  
 
@@ -35,5 +35,6 @@ go: Use to move from room to room -- Type "go" + "space" + "a direction"
 Hint(s): Directions are north, south, east, or west  
 
 quit: Use to quit the program  
+
 
 
