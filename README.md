@@ -7,6 +7,10 @@ Haunted House is a text based adventure game in which the user can explore rooms
 
 ## Play Haunted House
 
+Click the link below to run the program in GitHub Codespaces:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/bdtripp/haunted_house)
+
 Click the link below to run the program on repl.it:
 
 [![Run on Replit](https://replit.com/badge/github/bdtripp/haunted_house)](https://replit.com/@BrianTripp/Haunted-House)
