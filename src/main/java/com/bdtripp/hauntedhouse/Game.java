@@ -171,13 +171,17 @@ public class Game
     }
 
     /**
-     * Print details about the room including the items and characters that it contains
+     * Get details about the room including the items and characters that it contains
      */
-    public void printRoomDetails()
+    public String getRoomDetails()
     {
-        System.out.println(player.getCurrentRoom().getLongDescription());
-        System.out.println(player.getCurrentRoom().getItemsInRoomDetails());
-        System.out.println(player.getCurrentRoom().getCharactersInRoomDetails());
+        StringBuilder buffer = new StringBuilder();
+        
+        buffer.append(player.getCurrentRoom().getLongDescription()).append("\n");
+        buffer.append(player.getCurrentRoom().getItemsInRoomDetails()).append("\n");
+        buffer.append(player.getCurrentRoom().getCharactersInRoomDetails()).append("\n");
+
+        return buffer.toString();
     }
 
     /**
