@@ -142,7 +142,7 @@ public class Game
      */
     public void play()
     {
-        printWelcome();
+        getWelcomeMessage();
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
@@ -156,18 +156,24 @@ public class Game
     }
 
     /**
-     * Print out the opening message for the player.
+     * Get the welcome message
+     * @return A welcome message to display when a new game is started that includes
+     * information about the room a player is in. 
      */
-    private void printWelcome()
+    private String getWelcomeMessage()
     {
-        System.out.println();
-        System.out.println("Welcome to the Haunted House!");
-        System.out.println("Haunted House is a spooky adventure game.");
-        System.out.println("Those who enter may never escape.");
-        System.out.println("Find the exit and you just might survive.");
-        System.out.println("Use the \"help\" command if you need help.");
-        System.out.println();
-        printRoomDetails();
+        StringBuilder buffer = new StringBuilder();
+
+        buffer.append("\n");
+        buffer.append("Welcome to the Haunted House!").append("\n");
+        buffer.append("Haunted House is a spooky adventure game.").append("\n");
+        buffer.append("Those who enter may never escape.").append("\n");
+        buffer.append("Find the exit and you just might survive.").append("\n");
+        buffer.append("Use the \"help\" command if you need help.").append("\n");
+        buffer.append("\n");
+        buffer.append(getRoomDetails());
+
+        return buffer.toString();
     }
 
     /**
@@ -370,7 +376,7 @@ public class Game
     private void enterRoom(Room nextRoom, boolean addToHistory)
     {
         player.moveToRoom(nextRoom, addToHistory);
-        printRoomDetails();
+        getRoomDetails();
     }
 
     /**
