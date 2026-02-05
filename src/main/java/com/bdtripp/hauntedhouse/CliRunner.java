@@ -20,10 +20,9 @@ public class CliRunner
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
 
-        boolean finished = false;
-        while(! finished) {
+        while(!game.isGameOver()) {
             Command command = parser.getCommand();
-            finished = game.processCommand(command);
+            game.processCommand(command);
         }
 
         System.out.println("Thank you for playing.  Good bye.");

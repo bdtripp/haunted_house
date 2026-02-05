@@ -23,6 +23,7 @@ public class Game
     private Parser parser;
     private Player player;
     private ArrayList<Room> rooms;
+    private boolean gameOver;
 
     /**
      * Create the game and initialise its internal map.
@@ -176,12 +177,9 @@ public class Game
     /**
      * Given a command, process (that is: execute) the command.
      * @param command The command to be processed.
-     * @return true If the command ends the game, false otherwise.
      */
-    private boolean processCommand(Command command)
+    private void processCommand(Command command)
     {
-        boolean quitGame = false;
-
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
             return false;
@@ -192,7 +190,7 @@ public class Game
             printHelp();
         }
         else if(commandWord.equals("go")) {
-            quitGame = goRoom(command);
+            goRoom(command);
         }
         else if(commandWord.equals("look")) {
             look();
@@ -228,10 +226,8 @@ public class Game
             goBack(command);
         }
         else if(commandWord.equals("quit")) {
-            quitGame = quit(command);
+            quit(command);
         }
-
-        return quitGame;
     }
 
     // implementations of user commands:
@@ -317,12 +313,11 @@ public class Game
      * the new room, otherwise print an error message.
      * @param command The command that was entered
      */
-    private boolean goRoom(Command command)
+    private void goRoom(Command command)
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             System.out.println("Go where?");
-            return false;
         }
 
         String direction = command.getSecondWord();
@@ -345,10 +340,9 @@ public class Game
             enterRoom(nextRoom, true);
             if(player.getMovesLeft() == 0) {
                 System.out.println("You ran out of moves! Game Over...");
-                return true; // signals to quit the game
+                endGame();
             }
         }
-        return false;
     }
 
     /**
@@ -399,17 +393,30 @@ public class Game
     /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
-     * @return true, if this command quits the game, false otherwise.
      */
-    private boolean quit(Command command)
+    private void quit(Command command)
     {
         if(command.hasSecondWord()) {
             System.out.println("Quit what?");
-            return false;
         }
         else {
-            return true;  // signal that we want to quit
+            endGame();
         }
+    }
+
+    /**
+     * End the game.
+     */
+    private void endGame() {
+        gameOver = true;
+    }
+
+    /**
+     * Check if the game is over
+     * @return true if the game is over, false otherwise
+     */
+    public boolean isGameOver() {
+        return gameOver;
     }
 
     /**
