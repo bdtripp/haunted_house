@@ -15,7 +15,7 @@ import java.util.Random;
  *  executes the commands that the parser returns.
  *
  * @author  Michael Kölling, David J. Barnes, and Brian Tripp
- * @version 2020.06.13
+ * @version 2026.02.05
  */
 
 public class Game
@@ -135,15 +135,6 @@ public class Game
         int index = randomGenerator.nextInt(rooms.size());
 
         return rooms.get(index);
-    }
-
-    /**
-     *  Main play routine.  Loops until end of play.
-     * @return The welcome message 
-     */
-    public String play()
-    {
-        return getWelcomeMessage();
     }
 
     /**
