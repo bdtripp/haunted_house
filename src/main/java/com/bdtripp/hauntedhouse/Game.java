@@ -139,26 +139,17 @@ public class Game
 
     /**
      *  Main play routine.  Loops until end of play.
+     * @return The welcome message 
      */
-    public void play()
+    public String play()
     {
-        getWelcomeMessage();
-
-        // Enter the main command loop.  Here we repeatedly read commands and
-        // execute them until the game is over.
-
-        boolean finished = false;
-        while(! finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
-        }
-        System.out.println("Thank you for playing.  Good bye.");
+        return getWelcomeMessage();
     }
 
     /**
-     * Get the welcome message
-     * @return A welcome message to display when a new game is started that includes
+     * Get the welcome message that displays when a new game is started. Includes 
      * information about the room a player is in. 
+     * @return The welcome message 
      */
     private String getWelcomeMessage()
     {
@@ -178,6 +169,7 @@ public class Game
 
     /**
      * Get details about the room including the items and characters that it contains
+     * @return The details about the room
      */
     public String getRoomDetails()
     {
@@ -372,11 +364,12 @@ public class Game
      * Enters the specified room and prints the description
      * @param nextRoom The room to move to
      * @param addToHistory True if the current room should be added to history
+     * @return The details about the room
      */
-    private void enterRoom(Room nextRoom, boolean addToHistory)
+    private String enterRoom(Room nextRoom, boolean addToHistory)
     {
         player.moveToRoom(nextRoom, addToHistory);
-        getRoomDetails();
+        return getRoomDetails();
     }
 
     /**
