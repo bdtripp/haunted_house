@@ -177,7 +177,7 @@ public class Game
     /**
      * Given a command, process (that is: execute) the command.
      * @param command The command to be processed.
-     * @return The output to the console
+     * @return A message to display
      */
     private String processCommand(Command command)
     {
@@ -190,28 +190,28 @@ public class Game
             return getHelpMessage();
         }
         else if(commandWord.equals("go")) {
-            goRoom(command);
+            return goRoom(command);
         }
         else if(commandWord.equals("look")) {
-            look();
+            return look();
         }
         else if(commandWord.equals("eat")) {
-            eat(command);
+            return eat(command);
         }
         else if(commandWord.equals("take")) {
-            take(command);
+            return take(command);
         }
         else if(commandWord.equals("drop")) {
-            drop(command);
+            return drop(command);
         }
         else if(commandWord.equals("items")) {
-            showItems();
+            return showItems();
         }
         else if(commandWord.equals("stats")) {
-            showStats();
+            return showStats();
         }
         else if(commandWord.equals("talk")) {
-            talk(command);
+            return talk(command);
         }
         else if(commandWord.equals("give")) {
             giveItem(command);
@@ -351,7 +351,7 @@ public class Game
                 return "You ran out of moves! Game Over...";
                 endGame();
             }
-            String roomDetails = enterRoom(nextRoom, true);
+            return enterRoom(nextRoom, true);
         }
     }
 
@@ -368,35 +368,36 @@ public class Game
     }
 
     /**
-     * Print out information about the current location
+     * Get information about the current location
+     * @return A message about the current location
      */
-    private void look()
+    private String look()
     {
-        System.out.println(player.getCurrentRoom().getLongDescription());
+        return player.getCurrentRoom().getLongDescription();
     }
 
     /**
      * Eat some food to reduce hunger
      * @param command The command that was entered
+     * @return A message to display in the console
      */
-    private void eat(Command command)
+    private String eat(Command command)
     {
         if(!command.hasSecondWord()) {
-            System.out.println("Eat what?");
-            return;
+            return "Eat what?";
         }
 
         String itemName = command.getSecondWord();
         Item itemToEat = player.dropItem(itemName);
 
         if(itemToEat == null) {
-            System.out.println("That item doesn't exist.");
+            return "That item doesn't exist.";
         }
         else if(!itemToEat.isEdible()) {
-            System.out.println("You can't eat that...");
+            return "You can't eat that...";
         }
         else {
-            player.ingest(itemToEat);
+            return player.ingest(itemToEat);
         }
     }
 
@@ -449,73 +450,96 @@ public class Game
     }
 
     /**
-     * Player picks up and item to carry with them
+     * Player picks up an item to carry with them
      * @param command The command that was entered
+     * @return A message to display in the console
      */
-    private void take(Command command)
+    private String take(Command command)
     {
         if(!command.hasSecondWord()) {
-            System.out.println("Take what?");
-            return;
+            return "Take what?";
         }
 
         String itemName = command.getSecondWord();
         Item itemToTake = player.getCurrentRoom().removeItemFromRoom(itemName);
 
         if(itemToTake == null) {
-            System.out.println("That item doesn't exist in this room");
+            return "That item doesn't exist in this room";
         }
         else if((itemToTake.getWeight() + player.getCurrentCarryWeight()) >
                 player.getMaxCarryWeight()) {
-            System.out.println("It's too heavy! You can carry up to " +
+            return "It's too heavy! You can carry up to " +
                     player.getMaxCarryWeight() + " units. Maybe if you dropped \n" +
-                    "some items you could manage it. Or perhaps it's simply too heavy.");
+                    "some items you could manage it. Or perhaps it's simply too heavy.";
         }
         else {
             player.takeItem(itemToTake);
-            System.out.println("You picked up " + itemToTake.getDescription() +
-                    "!");
+            return "You picked up " + itemToTake.getDescription() + "!";
         }
     }
 
     /**
      * Player drops an item so they no longer have to carry it
      * @param command The command that was entered
+     * @return  A message to display in the console
      */
-    private void drop(Command command)
+    private String drop(Command command)
     {
         if(!command.hasSecondWord()) {
-            System.out.println("Drop what?");
-            return;
+            return "Drop what?";
         }
 
         String itemName = command.getSecondWord();
         Item droppedItem = player.dropItem(itemName);
 
         if(droppedItem == null) {
-            System.out.println("You don't have one of those.");
+            return "You don't have one of those.";
         }
         else {
-            System.out.println("You dropped " + droppedItem.getDescription());
             player.getCurrentRoom().addItem(droppedItem);
+            return "You dropped " + droppedItem.getDescription();
         }
     }
 
     /**
-     * Prints out the details of all of the items that the player is
+     * Get details about all of the items that the player is
      * currently carrying
+     * @return A message about the items the player is carrying
      */
-    private void showItems()
+    private String showItems()
     {
-        System.out.println(player.getCurrentItemDetails());
+        return player.getCurrentItemDetails();
     }
 
     /**
-     * Prints out the players current stats
+     * Get the players current stats
+     * @return A message about the players current stats
      */
-    private void showStats()
+    private String showStats()
     {
-        System.out.println(player.getStats());
+        return player.getStats();
+    }
+
+    /**
+     * Talk a character
+     * @param command The command that was entered
+     * @return  A message to display in the console
+     */
+    public String talk(Command command)
+    {
+        if(!command.hasSecondWord()){
+            return "Talk to who?";
+        }
+
+        String characterName = command.getSecondWord();
+        Character character = player.getCurrentRoom().getCharacter(characterName);
+
+        if(character == null) {
+            return "That is not someone who can be spoken to.";
+        }
+        else {
+            return character.getInitialDialog();
+        }
     }
 
     /**
@@ -565,27 +589,6 @@ public class Game
         else {
             System.out.println("Beamer fired!");
             enterRoom(player.getBeamerLocation(), true);
-        }
-    }
-
-    /**
-     * Talk a character
-     * @param command The command that was entered
-     */
-    public void talk(Command command)
-    {
-        if(!command.hasSecondWord()){
-            System.out.println("Talk to who?");
-        }
-
-        String characterName = command.getSecondWord();
-        Character character = player.getCurrentRoom().getCharacter(characterName);
-
-        if(character == null) {
-            System.out.println("That is not someone who can be spoken to.");
-        }
-        else {
-            System.out.println(character.getInitialDialog());
         }
     }
 

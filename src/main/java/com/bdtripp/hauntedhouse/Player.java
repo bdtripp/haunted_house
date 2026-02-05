@@ -12,7 +12,7 @@ import java.util.Stack;
  * and their current stats.
  *
  * @author  Brian Tripp
- * @version 2020.06.13
+ * @version 2026.02.05
  */
 public class Player
 {
@@ -257,8 +257,9 @@ public class Player
     /**
      * Ingest an item
      * @param item The item to ingest
+     * @return A message to display when the item is ingested
      */
-    public void ingest(Item item) {
+    public String ingest(Item item) {
         String propToAffect = item.getPropToAffect();
         int affectValue = item.getAffectValue();
 
@@ -272,7 +273,7 @@ public class Player
             maxCarryWeight += affectValue;
         }
 
-        System.out.println("That was delicious. Not only that but your " + propToAffect + " increased by " + affectValue + "!");
+        return "That was delicious. Not only that but your " + propToAffect + " increased by " + affectValue + "!";
     }
 
     /**
