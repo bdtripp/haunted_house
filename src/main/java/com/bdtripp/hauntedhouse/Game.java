@@ -15,7 +15,7 @@ import java.util.Random;
  *  executes the commands that the parser returns.
  *
  * @author  Michael Kölling, David J. Barnes, and Brian Tripp
- * @version 2020.06.13
+ * @version 2026.02.05
  */
 
 public class Game
@@ -23,6 +23,7 @@ public class Game
     private Parser parser;
     private Player player;
     private ArrayList<Room> rooms;
+    private boolean gameOver;
 
     /**
      * Create the game and initialise its internal map.
@@ -138,57 +139,47 @@ public class Game
     }
 
     /**
-     *  Main play routine.  Loops until end of play.
+     * Get the welcome message that displays when a new game is started. Includes 
+     * information about the room a player is in. 
+     * @return The welcome message 
      */
-    public void play()
+    private String getWelcomeMessage()
     {
-        printWelcome();
+        StringBuilder buffer = new StringBuilder();
 
-        // Enter the main command loop.  Here we repeatedly read commands and
-        // execute them until the game is over.
+        buffer.append("\n");
+        buffer.append("Welcome to the Haunted House!").append("\n");
+        buffer.append("Haunted House is a spooky adventure game.").append("\n");
+        buffer.append("Those who enter may never escape.").append("\n");
+        buffer.append("Find the exit and you just might survive.").append("\n");
+        buffer.append("Use the \"help\" command if you need help.").append("\n");
+        buffer.append("\n");
+        buffer.append(getRoomDetails());
 
-        boolean finished = false;
-        while(! finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
-        }
-        System.out.println("Thank you for playing.  Good bye.");
+        return buffer.toString();
     }
 
     /**
-     * Print out the opening message for the player.
+     * Get details about the room including the items and characters that it contains
+     * @return The details about the room
      */
-    private void printWelcome()
+    public String getRoomDetails()
     {
-        System.out.println();
-        System.out.println("Welcome to the Haunted House!");
-        System.out.println("Haunted House is a spooky adventure game.");
-        System.out.println("Those who enter may never escape.");
-        System.out.println("Find the exit and you just might survive.");
-        System.out.println("Use the \"help\" command if you need help.");
-        System.out.println();
-        printRoomDetails();
-    }
+        StringBuilder buffer = new StringBuilder();
+        
+        buffer.append(player.getCurrentRoom().getLongDescription()).append("\n");
+        buffer.append(player.getCurrentRoom().getItemsInRoomDetails()).append("\n");
+        buffer.append(player.getCurrentRoom().getCharactersInRoomDetails()).append("\n");
 
-    /**
-     * Print details about the room including the items and characters that it contains
-     */
-    public void printRoomDetails()
-    {
-        System.out.println(player.getCurrentRoom().getLongDescription());
-        System.out.println(player.getCurrentRoom().getItemsInRoomDetails());
-        System.out.println(player.getCurrentRoom().getCharactersInRoomDetails());
+        return buffer.toString();
     }
 
     /**
      * Given a command, process (that is: execute) the command.
      * @param command The command to be processed.
-     * @return true If the command ends the game, false otherwise.
      */
-    private boolean processCommand(Command command)
+    private void processCommand(Command command)
     {
-        boolean quitGame = false;
-
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
             return false;
@@ -199,7 +190,7 @@ public class Game
             printHelp();
         }
         else if(commandWord.equals("go")) {
-            quitGame = goRoom(command);
+            goRoom(command);
         }
         else if(commandWord.equals("look")) {
             look();
@@ -235,10 +226,8 @@ public class Game
             goBack(command);
         }
         else if(commandWord.equals("quit")) {
-            quitGame = quit(command);
+            quit(command);
         }
-
-        return quitGame;
     }
 
     // implementations of user commands:
@@ -324,12 +313,11 @@ public class Game
      * the new room, otherwise print an error message.
      * @param command The command that was entered
      */
-    private boolean goRoom(Command command)
+    private void goRoom(Command command)
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             System.out.println("Go where?");
-            return false;
         }
 
         String direction = command.getSecondWord();
@@ -352,21 +340,21 @@ public class Game
             enterRoom(nextRoom, true);
             if(player.getMovesLeft() == 0) {
                 System.out.println("You ran out of moves! Game Over...");
-                return true; // signals to quit the game
+                endGame();
             }
         }
-        return false;
     }
 
     /**
      * Enters the specified room and prints the description
      * @param nextRoom The room to move to
      * @param addToHistory True if the current room should be added to history
+     * @return The details about the room
      */
-    private void enterRoom(Room nextRoom, boolean addToHistory)
+    private String enterRoom(Room nextRoom, boolean addToHistory)
     {
         player.moveToRoom(nextRoom, addToHistory);
-        printRoomDetails();
+        return getRoomDetails();
     }
 
     /**
@@ -405,17 +393,30 @@ public class Game
     /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
-     * @return true, if this command quits the game, false otherwise.
      */
-    private boolean quit(Command command)
+    private void quit(Command command)
     {
         if(command.hasSecondWord()) {
             System.out.println("Quit what?");
-            return false;
         }
         else {
-            return true;  // signal that we want to quit
+            endGame();
         }
+    }
+
+    /**
+     * End the game.
+     */
+    private void endGame() {
+        gameOver = true;
+    }
+
+    /**
+     * Check if the game is over
+     * @return true if the game is over, false otherwise
+     */
+    public boolean isGameOver() {
+        return gameOver;
     }
 
     /**
