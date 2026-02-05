@@ -214,13 +214,13 @@ public class Game
             return talk(command);
         }
         else if(commandWord.equals("give")) {
-            giveItem(command);
+            return giveItem(command);
         }
         else if(commandWord.equals("charge")) {
-            chargeBeamer(command);
+            return chargeBeamer(command);
         }
         else if(commandWord.equals("fire")) {
-            fireBeamer(command);
+            return fireBeamer(command);
         }
         else if(commandWord.equals("back")) {
             goBack(command);
@@ -338,8 +338,7 @@ public class Game
         else if(currentRoom.getExit(direction).isLocked()) {
             if(player.hasKey()) {
                 buffer.append("The door is locked...but you have the key!").append("\n");
-                String roomDetails = enterRoom(nextRoom, true);
-                buffer.append(roomDetails);
+                buffer.append(enterRoom(nextRoom, true));
                 return buffer.toString();
             }
             else {
@@ -402,20 +401,6 @@ public class Game
     }
 
     /**
-     * "Quit" was entered. Check the rest of the command to see
-     * whether we really quit the game.
-     */
-    private void quit(Command command)
-    {
-        if(command.hasSecondWord()) {
-            System.out.println("Quit what?");
-        }
-        else {
-            endGame();
-        }
-    }
-
-    /**
      * End the game.
      */
     private void endGame() {
@@ -428,25 +413,6 @@ public class Game
      */
     public boolean isGameOver() {
         return gameOver;
-    }
-
-    /**
-     * "Back" was entered. Takes the player back to the previous room they
-     * were in.
-     * @param command The command that was entered
-     */
-    private void goBack(Command command)
-    {
-        if(command.hasSecondWord()) {
-            System.out.println("\"back\" command does not allow a second word.");
-            return;
-        }
-        if(player.getRoomHistory().empty()) {
-            System.out.println("There is nowhere to go back to.");
-        }
-        else {
-            enterRoom(player.getPreviousRoom(), false);
-        }
     }
 
     /**
@@ -481,7 +447,7 @@ public class Game
     /**
      * Player drops an item so they no longer have to carry it
      * @param command The command that was entered
-     * @return  A message to display in the console
+     * @return A message to display in the console
      */
     private String drop(Command command)
     {
@@ -523,7 +489,7 @@ public class Game
     /**
      * Talk a character
      * @param command The command that was entered
-     * @return  A message to display in the console
+     * @return A message to display in the console
      */
     public String talk(Command command)
     {
@@ -543,78 +509,27 @@ public class Game
     }
 
     /**
-     * Charges the beamer. The beamer memorizes the location of the players
-     * current room.
-     * @param command The command that was entered
-     */
-    private void chargeBeamer(Command command)
-    {
-        if(!command.hasSecondWord()) {
-            System.out.println("Charge what?");
-            return;
-        }
-
-        String itemToCharge = command.getSecondWord();
-
-        if(!itemToCharge.equals("beamer")) {
-            System.out.println("That item can't be charged.");
-        }
-        else {
-            System.out.println("Beamer charged!");
-            player.setBeamerLocation();
-            player.setBeamerCharge(true);
-        }
-    }
-
-    /**
-     * Fires the beamer. Returns the player to the location at which the
-     * beamer was last charged.
-     * @param command The command that was entered
-     */
-    private void fireBeamer(Command command)
-    {
-        if(!command.hasSecondWord()) {
-            System.out.println("Fire what?");
-            return;
-        }
-
-        String itemToFire = command.getSecondWord();
-
-        if(!itemToFire.equals("beamer")) {
-            System.out.println("That item can't be fired.");
-        }
-        else if(player.getBeamerCharge() == false){
-            System.out.println("Your beamer isn't charged!");
-        }
-        else {
-            System.out.println("Beamer fired!");
-            enterRoom(player.getBeamerLocation(), true);
-        }
-    }
-
-    /**
      * Gives the item to the specified character
      * @param command The command that was entered
-     *
+     * @return A message to display in the console
      */
-    public void giveItem(Command command)
+    public String giveItem(Command command)
     {
+        StringBuilder buffer = new StringBuilder();
+
         if(!command.hasSecondWord()){
-            System.out.println("Give what... to who...?");
-            return;
+            return "Give what... to who...?";
         }
 
         if(!command.hasThirdWord()){
-            System.out.println("Give it to who?");
-            return;
+            return "Give it to who?";
         }
 
         String characterName = command.getThirdWord();
         Character character = player.getCurrentRoom().getCharacter(characterName);
 
         if(character == null) {
-            System.out.println("Who is \"" + characterName + "\" ?");
-            return;
+            return "Who is \"" + characterName + "\" ?";
         }
 
         String itemSoughtName = character.getItemSought();
@@ -623,16 +538,103 @@ public class Game
         Item itemForReward = character.getItemForReward();
 
         if(itemToGive == null) {
-            System.out.println("You don't have a(n) \"" + itemToGiveName + "\"");
+            return "You don't have a(n) \"" + itemToGiveName + "\"";
         }
         else if(itemToGive.getName().equals(itemSoughtName)) {
             player.dropItem(itemToGiveName);
-            System.out.println(character.getAcceptanceDialog());
+            buffer.append(character.getAcceptanceDialog()).append("\n");
             player.takeItem(itemForReward);
-            System.out.println("Received " + itemForReward.getDescription() + "!");
+            buffer.append("Received " + itemForReward.getDescription() + "!").append("\n");
+            return buffer.toString();
         }
         else {
-            System.out.println(characterName + " doesn't want your " + itemToGiveName);
+            return characterName + " doesn't want your " + itemToGiveName;
+        }
+    }
+
+    /**
+     * Charges the beamer. The beamer memorizes the location of the players
+     * current room.
+     * @param command The command that was entered
+     * @return A message to display in the console
+     */
+    private String chargeBeamer(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            return "Charge what?";
+        }
+
+        String itemToCharge = command.getSecondWord();
+
+        if(!itemToCharge.equals("beamer")) {
+            return "That item can't be charged.";
+        }
+        else {
+            player.setBeamerLocation();
+            player.setBeamerCharge(true);
+            return "Beamer charged!";
+        }
+    }
+
+    /**
+     * Fires the beamer. Returns the player to the location at which the
+     * beamer was last charged.
+     * @param command The command that was entered
+     * @return A message to display in the console
+     */
+    private String fireBeamer(Command command)
+    {
+        StringBuilder buffer = new StringBuilder();
+        if(!command.hasSecondWord()) {
+            return "Fire what?";
+        }
+
+        String itemToFire = command.getSecondWord();
+
+        if(!itemToFire.equals("beamer")) {
+            return "That item can't be fired.";
+        }
+        else if(player.getBeamerCharge() == false){
+            return "Your beamer isn't charged!";
+        }
+        else {
+            buffer.append("Beamer fired!").append("\n");
+            buffer.append(enterRoom(player.getBeamerLocation(), true)).append("\n");
+            return buffer.toString();
+        }
+    }
+
+    /**
+     * "Back" was entered. Takes the player back to the previous room they
+     * were in.
+     * @param command The command that was entered
+     * @return A message to display in the console
+     */
+    private String goBack(Command command)
+    {
+        if(command.hasSecondWord()) {
+            return ("\"back\" command does not allow a second word.");
+        }
+        if(player.getRoomHistory().empty()) {
+            return "There is nowhere to go back to.";
+        }
+        else {
+            return enterRoom(player.getPreviousRoom(), false);
+        }
+    }
+
+    /**
+     * "Quit" was entered. Check the rest of the command to see
+     * whether we really quit the game.
+     * @return A message to display in the console
+     */
+    private String quit(Command command)
+    {
+        if(command.hasSecondWord()) {
+            return "Quit what?";
+        }
+        else {
+            endGame();
         }
     }
 }
