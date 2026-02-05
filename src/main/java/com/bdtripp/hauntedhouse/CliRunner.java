@@ -22,7 +22,8 @@ public class CliRunner
 
         while(!game.isGameOver()) {
             Command command = parser.getCommand();
-            game.processCommand(command);
+            String output = game.processCommand(command);
+            System.out.println(output);
         }
 
         System.out.println("Thank you for playing.  Good bye.");

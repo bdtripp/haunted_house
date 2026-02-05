@@ -177,17 +177,17 @@ public class Game
     /**
      * Given a command, process (that is: execute) the command.
      * @param command The command to be processed.
+     * @return The output to the console
      */
-    private void processCommand(Command command)
+    private String processCommand(Command command)
     {
         if(command.isUnknown()) {
-            System.out.println("I don't know what you mean...");
-            return false;
+            return "I don't know what you mean...";
         }
 
         String commandWord = command.getCommandWord();
         if(commandWord.equals("help")) {
-            printHelp();
+            return getHelpMessage();
         }
         else if(commandWord.equals("go")) {
             goRoom(command);
@@ -233,91 +233,99 @@ public class Game
     // implementations of user commands:
 
     /**
-     * Print out some help information.
-     * Here we print a list of the command words and directions on how to
+     * Get the help message.
+     * Here we get a list of the command words and directions on how to
      * play the game.
+     * @return A help message
      */
-    private void printHelp()
+    private String getHelpMessage()
     {
-        System.out.println("Your command words are:");
-        System.out.println(parser.getCommands() + "\n");
+        StringBuilder buffer = new StringBuilder();
 
-        System.out.println("How to use the commands: \n");
+        buffer.append("Your command words are: \n");
+        buffer.append(parser.getCommands() + "\n");
 
-        System.out.println("go: Use to move from room to room");
-        System.out.println("Usage: type \"go\" + \"space\" + \"a direction\"");
-        System.out.println("Hint(s): Directions are north, south, east, or west\n");
+        buffer.append("How to use the commands: \n");
 
-        System.out.println("quit: Use to quit the program");
-        System.out.println("Usage: type \"quit\"");
-        System.out.println("Hint(s): N/A\n");
+        buffer.append("go: Use to move from room to room");
+        buffer.append("Usage: type \"go\" + \"space\" + \"a direction\"");
+        buffer.append("Hint(s): Directions are north, south, east, or west\n");
 
-        System.out.println("help: Use to get information on how to play the game ");
-        System.out.println("Usage: type \"help\"");
-        System.out.println("Hint(s): N/A\n");
+        buffer.append("quit: Use to quit the program");
+        buffer.append("Usage: type \"quit\"");
+        buffer.append("Hint(s): N/A\n");
 
-        System.out.println("look: Use to get a description of your location and directions that you are able to travel in");
-        System.out.println("Usage: type \"look\"");
-        System.out.println("Hint(s): N/A\n");
+        buffer.append("help: Use to get information on how to play the game ");
+        buffer.append("Usage: type \"help\"");
+        buffer.append("Hint(s): N/A\n");
 
-        System.out.println("eat: Use to eat an item. Eating an item can boost your stats. Not all items are edible.");
-        System.out.println("Usage: type \"eat\" + \"space\" + \"the name of the item you want to eat\"");
-        System.out.println("Hint(s): example command - \"eat potion\"\n");
+        buffer.append("look: Use to get a description of your location and directions that you are able to travel in");
+        buffer.append("Usage: type \"look\"");
+        buffer.append("Hint(s): N/A\n");
 
-        System.out.println("back: Use to backtrack consecutively through the rooms that you were just in");
-        System.out.println("Usage: type \"back\"");
-        System.out.println("Hint(s): N/A\n");
+        buffer.append("eat: Use to eat an item. Eating an item can boost your stats. Not all items are edible.");
+        buffer.append("Usage: type \"eat\" + \"space\" + \"the name of the item you want to eat\"");
+        buffer.append("Hint(s): example command - \"eat potion\"\n");
 
-        System.out.println("take: If you find an item in a room, you can use the \"take\" command to pick up the item");
-        System.out.println("Usage: type \"take\" + \"space\" + \"the name of the item you want to pick up\"");
-        System.out.println("Hint(s): N/A\n");
+        buffer.append("back: Use to backtrack consecutively through the rooms that you were just in");
+        buffer.append("Usage: type \"back\"");
+        buffer.append("Hint(s): N/A\n");
 
-        System.out.println("drop: Use to drop an item that you are carrying.");
-        System.out.println("Usage: type \"drop\" + \"space\" + \"the name of the item you want to drop\"");
-        System.out.println("Hint(s): You may want to drop an item since you can only carry so much weight\n");
+        buffer.append("take: If you find an item in a room, you can use the \"take\" command to pick up the item");
+        buffer.append("Usage: type \"take\" + \"space\" + \"the name of the item you want to pick up\"");
+        buffer.append("Hint(s): N/A\n");
 
-        System.out.println("items: Use to print a list of items that you are carrying and descriptions of each item");
-        System.out.println("Usage: type \"items\"");
-        System.out.println("Hint(s): N/A\n");
+        buffer.append("drop: Use to drop an item that you are carrying.");
+        buffer.append("Usage: type \"drop\" + \"space\" + \"the name of the item you want to drop\"");
+        buffer.append("Hint(s): You may want to drop an item since you can only carry so much weight\n");
 
-        System.out.println("stats: Use to print a list of the players current stats");
-        System.out.println("Usage: type \"stats\"");
-        System.out.println("Hint(s): This command will display information such as health, strength, and maximum carry weight.\n");
+        buffer.append("items: Use to print a list of items that you are carrying and descriptions of each item");
+        buffer.append("Usage: type \"items\"");
+        buffer.append("Hint(s): N/A\n");
 
-        System.out.println("charge: Use to charge an item");
-        System.out.println("Usage: type \"charge\" + \"space\" + \"the name of the item you want to charge\"");
-        System.out.println("Hint(s): You will need to charge your beamer before firing it. " +
+        buffer.append("stats: Use to print a list of the players current stats");
+        buffer.append("Usage: type \"stats\"");
+        buffer.append("Hint(s): This command will display information such as health, strength, and maximum carry weight.\n");
+
+        buffer.append("charge: Use to charge an item");
+        buffer.append("Usage: type \"charge\" + \"space\" + \"the name of the item you want to charge\"");
+        buffer.append("Hint(s): You will need to charge your beamer before firing it. " +
                 "Charge the beamer in a room that you want to use as a return point. Later when you fire the beamer, " +
                 "it will send you back to the room that you charged it in originally.\n"
         );
 
-        System.out.println("fire: ");
-        System.out.println("Usage: type \"fire\" + \"space\" + \"the name of the item you want to fire\"");
-        System.out.println("Hint(s): You will need to charge your beamer before firing it. " +
+        buffer.append("fire: ");
+        buffer.append("Usage: type \"fire\" + \"space\" + \"the name of the item you want to fire\"");
+        buffer.append("Hint(s): You will need to charge your beamer before firing it. " +
                 "Charge the beamer in a room that you want to use as a return point. Later when you fire the beamer, " +
                 "it will send you back to the room that you charged it in originally.\n"
         );
 
-        System.out.println("talk: If there is a character in a room, you can use this command to talk to them.");
-        System.out.println("Usage: type \"talk\" + \"space\" + \"the name of the person you want to talk to\"");
-        System.out.println("Hint(s): N/A\n");
+        buffer.append("talk: If there is a character in a room, you can use this command to talk to them.");
+        buffer.append("Usage: type \"talk\" + \"space\" + \"the name of the person you want to talk to\"");
+        buffer.append("Hint(s): N/A\n");
 
-        System.out.println("give: Use to give an item to a Character");
-        System.out.println("Hint(s): Certain characters will give you a reward in exchange for giving them an item that you found. " +
+        buffer.append("give: Use to give an item to a Character");
+        buffer.append("Hint(s): Certain characters will give you a reward in exchange for giving them an item that you found. " +
                 "You must be in the same room as the Character that you want to give an item to.\n"
         );
+
+        return buffer.toString();
     }
 
     /**
      * Try to go in one direction. If there is an exit, enter
-     * the new room, otherwise print an error message.
+     * the new room, otherwise display an error message.
      * @param command The command that was entered
+     * @return A message to display in the console
      */
-    private void goRoom(Command command)
+    private String goRoom(Command command)
     {
+        StringBuilder buffer = new StringBuilder();
+
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
+            return "Go where?";
         }
 
         String direction = command.getSecondWord();
@@ -325,23 +333,25 @@ public class Game
         Room nextRoom = currentRoom.getExitNeighbor(direction);
 
         if(nextRoom == null) {
-            System.out.println("There is no door!");
+            return "There is no door!";
         }
         else if(currentRoom.getExit(direction).isLocked()) {
             if(player.hasKey()) {
-                System.out.println("The door is locked...but you have the key!");
-                enterRoom(nextRoom, true);
+                buffer.append("The door is locked...but you have the key!").append("\n");
+                String roomDetails = enterRoom(nextRoom, true);
+                buffer.append(roomDetails);
+                return buffer.toString();
             }
             else {
-                System.out.println("The door is locked...you need to find the key!");
+                return "The door is locked...you need to find the key!";
             }
         }
         else {
-            enterRoom(nextRoom, true);
             if(player.getMovesLeft() == 0) {
-                System.out.println("You ran out of moves! Game Over...");
+                return "You ran out of moves! Game Over...";
                 endGame();
             }
+            String roomDetails = enterRoom(nextRoom, true);
         }
     }
 
