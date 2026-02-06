@@ -311,7 +311,7 @@ public class Game
         buffer.append("Usage: type \"give\" + \"space\" + \"the name of the item you want to give\"" + 
             " + \"space\" + \"the name of the character you want to give it to\".").append("\n");
         buffer.append("Hint(s): Certain characters will give you a reward in exchange for giving them an item that you found. " +
-            "You must be in the same room as the Character that you want to give an item to.").append("\n");
+            "You must be in the same room as the Character that you want to give an item to.");
 
         return buffer.toString();
     }

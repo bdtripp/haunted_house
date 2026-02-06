@@ -14,7 +14,7 @@ package com.bdtripp.hauntedhouse;
 public class CommandWords
 {
     // a constant array that holds all valid command words
-    private static final String[] validCommands = {
+    private static final String[] VALID_COMMANDS = {
             "go", "quit", "help", "look", "eat", "back", "take", "drop", "items", "stats",
             "charge", "fire", "talk", "give"
     };
@@ -34,8 +34,8 @@ public class CommandWords
      */
     public boolean isCommand(String aString)
     {
-        for(int i = 0; i < validCommands.length; i++) {
-            if(validCommands[i].equals(aString))
+        for(int i = 0; i < VALID_COMMANDS.length; i++) {
+            if(VALID_COMMANDS[i].equals(aString))
                 return true;
         }
         // if we get here, the string was not found in the commands
@@ -49,7 +49,7 @@ public class CommandWords
     public String getCommandList()
     {
         String commandString = "";
-        for(String command : validCommands) {
+        for(String command : VALID_COMMANDS) {
             commandString += command + " ";
         }
         return commandString;

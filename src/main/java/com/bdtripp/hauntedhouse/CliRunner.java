@@ -30,7 +30,7 @@ public class CliRunner
             Command command = parser.getCommand();
             String output = game.processCommand(command);
             if (!output.isEmpty()) {
-                System.out.println(output);
+                System.out.println(output + "\n");
             }
         }
     }
