@@ -143,7 +143,7 @@ public class Game
      * information about the room a player is in. 
      * @return The welcome message 
      */
-    private String getWelcomeMessage()
+    public String getWelcomeMessage()
     {
         StringBuilder buffer = new StringBuilder();
 
@@ -169,7 +169,7 @@ public class Game
         
         buffer.append(player.getCurrentRoom().getLongDescription()).append("\n");
         buffer.append(player.getCurrentRoom().getItemsInRoomDetails()).append("\n");
-        buffer.append(player.getCurrentRoom().getCharactersInRoomDetails()).append("\n");
+        buffer.append(player.getCurrentRoom().getCharactersInRoomDetails());
 
         return buffer.toString();
     }
@@ -177,147 +177,157 @@ public class Game
     /**
      * Given a command, process (that is: execute) the command.
      * @param command The command to be processed.
+     * @return A message to display
      */
-    private void processCommand(Command command)
+    public String processCommand(Command command)
     {
         if(command.isUnknown()) {
-            System.out.println("I don't know what you mean...");
-            return false;
+            return "I don't know what you mean...";
         }
 
         String commandWord = command.getCommandWord();
         if(commandWord.equals("help")) {
-            printHelp();
+            return getHelpMessage();
         }
         else if(commandWord.equals("go")) {
-            goRoom(command);
+            return goRoom(command);
         }
         else if(commandWord.equals("look")) {
-            look();
+            return look();
         }
         else if(commandWord.equals("eat")) {
-            eat(command);
+            return eat(command);
         }
         else if(commandWord.equals("take")) {
-            take(command);
+            return take(command);
         }
         else if(commandWord.equals("drop")) {
-            drop(command);
+            return drop(command);
         }
         else if(commandWord.equals("items")) {
-            showItems();
+            return showItems();
         }
         else if(commandWord.equals("stats")) {
-            showStats();
+            return showStats();
         }
         else if(commandWord.equals("talk")) {
-            talk(command);
+            return talk(command);
         }
         else if(commandWord.equals("give")) {
-            giveItem(command);
+            return giveItem(command);
         }
         else if(commandWord.equals("charge")) {
-            chargeBeamer(command);
+            return chargeBeamer(command);
         }
         else if(commandWord.equals("fire")) {
-            fireBeamer(command);
+            return fireBeamer(command);
         }
         else if(commandWord.equals("back")) {
-            goBack(command);
+            return goBack(command);
         }
         else if(commandWord.equals("quit")) {
-            quit(command);
+            return quit(command);
+        } else {
+            return "";
         }
     }
 
     // implementations of user commands:
 
     /**
-     * Print out some help information.
-     * Here we print a list of the command words and directions on how to
+     * Get the help message.
+     * Here we get a list of the command words and directions on how to
      * play the game.
+     * @return A help message
      */
-    private void printHelp()
+    private String getHelpMessage()
     {
-        System.out.println("Your command words are:");
-        System.out.println(parser.getCommands() + "\n");
+        StringBuilder buffer = new StringBuilder();
 
-        System.out.println("How to use the commands: \n");
+        buffer.append("Your command words are: \n");
+        buffer.append(parser.getCommands() + "\n");
 
-        System.out.println("go: Use to move from room to room");
-        System.out.println("Usage: type \"go\" + \"space\" + \"a direction\"");
-        System.out.println("Hint(s): Directions are north, south, east, or west\n");
+        buffer.append("How to use the commands: \n");
 
-        System.out.println("quit: Use to quit the program");
-        System.out.println("Usage: type \"quit\"");
-        System.out.println("Hint(s): N/A\n");
+        buffer.append("go: Use to move from room to room");
+        buffer.append("Usage: type \"go\" + \"space\" + \"a direction\"");
+        buffer.append("Hint(s): Directions are north, south, east, or west\n");
 
-        System.out.println("help: Use to get information on how to play the game ");
-        System.out.println("Usage: type \"help\"");
-        System.out.println("Hint(s): N/A\n");
+        buffer.append("quit: Use to quit the program");
+        buffer.append("Usage: type \"quit\"");
+        buffer.append("Hint(s): N/A\n");
 
-        System.out.println("look: Use to get a description of your location and directions that you are able to travel in");
-        System.out.println("Usage: type \"look\"");
-        System.out.println("Hint(s): N/A\n");
+        buffer.append("help: Use to get information on how to play the game ");
+        buffer.append("Usage: type \"help\"");
+        buffer.append("Hint(s): N/A\n");
 
-        System.out.println("eat: Use to eat an item. Eating an item can boost your stats. Not all items are edible.");
-        System.out.println("Usage: type \"eat\" + \"space\" + \"the name of the item you want to eat\"");
-        System.out.println("Hint(s): example command - \"eat potion\"\n");
+        buffer.append("look: Use to get a description of your location and directions that you are able to travel in");
+        buffer.append("Usage: type \"look\"");
+        buffer.append("Hint(s): N/A\n");
 
-        System.out.println("back: Use to backtrack consecutively through the rooms that you were just in");
-        System.out.println("Usage: type \"back\"");
-        System.out.println("Hint(s): N/A\n");
+        buffer.append("eat: Use to eat an item. Eating an item can boost your stats. Not all items are edible.");
+        buffer.append("Usage: type \"eat\" + \"space\" + \"the name of the item you want to eat\"");
+        buffer.append("Hint(s): example command - \"eat potion\"\n");
 
-        System.out.println("take: If you find an item in a room, you can use the \"take\" command to pick up the item");
-        System.out.println("Usage: type \"take\" + \"space\" + \"the name of the item you want to pick up\"");
-        System.out.println("Hint(s): N/A\n");
+        buffer.append("back: Use to backtrack consecutively through the rooms that you were just in");
+        buffer.append("Usage: type \"back\"");
+        buffer.append("Hint(s): N/A\n");
 
-        System.out.println("drop: Use to drop an item that you are carrying.");
-        System.out.println("Usage: type \"drop\" + \"space\" + \"the name of the item you want to drop\"");
-        System.out.println("Hint(s): You may want to drop an item since you can only carry so much weight\n");
+        buffer.append("take: If you find an item in a room, you can use the \"take\" command to pick up the item");
+        buffer.append("Usage: type \"take\" + \"space\" + \"the name of the item you want to pick up\"");
+        buffer.append("Hint(s): N/A\n");
 
-        System.out.println("items: Use to print a list of items that you are carrying and descriptions of each item");
-        System.out.println("Usage: type \"items\"");
-        System.out.println("Hint(s): N/A\n");
+        buffer.append("drop: Use to drop an item that you are carrying.");
+        buffer.append("Usage: type \"drop\" + \"space\" + \"the name of the item you want to drop\"");
+        buffer.append("Hint(s): You may want to drop an item since you can only carry so much weight\n");
 
-        System.out.println("stats: Use to print a list of the players current stats");
-        System.out.println("Usage: type \"stats\"");
-        System.out.println("Hint(s): This command will display information such as health, strength, and maximum carry weight.\n");
+        buffer.append("items: Use to print a list of items that you are carrying and descriptions of each item");
+        buffer.append("Usage: type \"items\"");
+        buffer.append("Hint(s): N/A\n");
 
-        System.out.println("charge: Use to charge an item");
-        System.out.println("Usage: type \"charge\" + \"space\" + \"the name of the item you want to charge\"");
-        System.out.println("Hint(s): You will need to charge your beamer before firing it. " +
+        buffer.append("stats: Use to print a list of the players current stats");
+        buffer.append("Usage: type \"stats\"");
+        buffer.append("Hint(s): This command will display information such as health, strength, and maximum carry weight.\n");
+
+        buffer.append("charge: Use to charge an item");
+        buffer.append("Usage: type \"charge\" + \"space\" + \"the name of the item you want to charge\"");
+        buffer.append("Hint(s): You will need to charge your beamer before firing it. " +
                 "Charge the beamer in a room that you want to use as a return point. Later when you fire the beamer, " +
                 "it will send you back to the room that you charged it in originally.\n"
         );
 
-        System.out.println("fire: ");
-        System.out.println("Usage: type \"fire\" + \"space\" + \"the name of the item you want to fire\"");
-        System.out.println("Hint(s): You will need to charge your beamer before firing it. " +
+        buffer.append("fire: ");
+        buffer.append("Usage: type \"fire\" + \"space\" + \"the name of the item you want to fire\"");
+        buffer.append("Hint(s): You will need to charge your beamer before firing it. " +
                 "Charge the beamer in a room that you want to use as a return point. Later when you fire the beamer, " +
                 "it will send you back to the room that you charged it in originally.\n"
         );
 
-        System.out.println("talk: If there is a character in a room, you can use this command to talk to them.");
-        System.out.println("Usage: type \"talk\" + \"space\" + \"the name of the person you want to talk to\"");
-        System.out.println("Hint(s): N/A\n");
+        buffer.append("talk: If there is a character in a room, you can use this command to talk to them.");
+        buffer.append("Usage: type \"talk\" + \"space\" + \"the name of the person you want to talk to\"");
+        buffer.append("Hint(s): N/A\n");
 
-        System.out.println("give: Use to give an item to a Character");
-        System.out.println("Hint(s): Certain characters will give you a reward in exchange for giving them an item that you found. " +
+        buffer.append("give: Use to give an item to a Character");
+        buffer.append("Hint(s): Certain characters will give you a reward in exchange for giving them an item that you found. " +
                 "You must be in the same room as the Character that you want to give an item to.\n"
         );
+
+        return buffer.toString();
     }
 
     /**
      * Try to go in one direction. If there is an exit, enter
-     * the new room, otherwise print an error message.
+     * the new room, otherwise display an error message.
      * @param command The command that was entered
+     * @return A message to display in the console
      */
-    private void goRoom(Command command)
+    private String goRoom(Command command)
     {
+        StringBuilder buffer = new StringBuilder();
+
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
+            return "Go where?";
         }
 
         String direction = command.getSecondWord();
@@ -325,23 +335,24 @@ public class Game
         Room nextRoom = currentRoom.getExitNeighbor(direction);
 
         if(nextRoom == null) {
-            System.out.println("There is no door!");
+            return "There is no door!";
         }
         else if(currentRoom.getExit(direction).isLocked()) {
             if(player.hasKey()) {
-                System.out.println("The door is locked...but you have the key!");
-                enterRoom(nextRoom, true);
+                buffer.append("The door is locked...but you have the key!").append("\n");
+                buffer.append(enterRoom(nextRoom, true));
+                return buffer.toString();
             }
             else {
-                System.out.println("The door is locked...you need to find the key!");
+                return "The door is locked...you need to find the key!";
             }
         }
         else {
-            enterRoom(nextRoom, true);
             if(player.getMovesLeft() == 0) {
-                System.out.println("You ran out of moves! Game Over...");
                 endGame();
+                return "You ran out of moves! Game Over...";
             }
+            return enterRoom(nextRoom, true);
         }
     }
 
@@ -358,49 +369,36 @@ public class Game
     }
 
     /**
-     * Print out information about the current location
+     * Get information about the current location
+     * @return A message about the current location
      */
-    private void look()
+    private String look()
     {
-        System.out.println(player.getCurrentRoom().getLongDescription());
+        return player.getCurrentRoom().getLongDescription();
     }
 
     /**
      * Eat some food to reduce hunger
      * @param command The command that was entered
+     * @return A message to display in the console
      */
-    private void eat(Command command)
+    private String eat(Command command)
     {
         if(!command.hasSecondWord()) {
-            System.out.println("Eat what?");
-            return;
+            return "Eat what?";
         }
 
         String itemName = command.getSecondWord();
         Item itemToEat = player.dropItem(itemName);
 
         if(itemToEat == null) {
-            System.out.println("That item doesn't exist.");
+            return "That item doesn't exist.";
         }
         else if(!itemToEat.isEdible()) {
-            System.out.println("You can't eat that...");
+            return "You can't eat that...";
         }
         else {
-            player.ingest(itemToEat);
-        }
-    }
-
-    /**
-     * "Quit" was entered. Check the rest of the command to see
-     * whether we really quit the game.
-     */
-    private void quit(Command command)
-    {
-        if(command.hasSecondWord()) {
-            System.out.println("Quit what?");
-        }
-        else {
-            endGame();
+            return player.ingest(itemToEat);
         }
     }
 
@@ -420,188 +418,120 @@ public class Game
     }
 
     /**
-     * "Back" was entered. Takes the player back to the previous room they
-     * were in.
+     * Player picks up an item to carry with them
      * @param command The command that was entered
+     * @return A message to display in the console
      */
-    private void goBack(Command command)
-    {
-        if(command.hasSecondWord()) {
-            System.out.println("\"back\" command does not allow a second word.");
-            return;
-        }
-        if(player.getRoomHistory().empty()) {
-            System.out.println("There is nowhere to go back to.");
-        }
-        else {
-            enterRoom(player.getPreviousRoom(), false);
-        }
-    }
-
-    /**
-     * Player picks up and item to carry with them
-     * @param command The command that was entered
-     */
-    private void take(Command command)
+    private String take(Command command)
     {
         if(!command.hasSecondWord()) {
-            System.out.println("Take what?");
-            return;
+            return "Take what?";
         }
 
         String itemName = command.getSecondWord();
         Item itemToTake = player.getCurrentRoom().removeItemFromRoom(itemName);
 
         if(itemToTake == null) {
-            System.out.println("That item doesn't exist in this room");
+            return "That item doesn't exist in this room";
         }
         else if((itemToTake.getWeight() + player.getCurrentCarryWeight()) >
                 player.getMaxCarryWeight()) {
-            System.out.println("It's too heavy! You can carry up to " +
+            return "It's too heavy! You can carry up to " +
                     player.getMaxCarryWeight() + " units. Maybe if you dropped \n" +
-                    "some items you could manage it. Or perhaps it's simply too heavy.");
+                    "some items you could manage it. Or perhaps it's simply too heavy.";
         }
         else {
             player.takeItem(itemToTake);
-            System.out.println("You picked up " + itemToTake.getDescription() +
-                    "!");
+            return "You picked up " + itemToTake.getDescription() + "!";
         }
     }
 
     /**
      * Player drops an item so they no longer have to carry it
      * @param command The command that was entered
+     * @return A message to display in the console
      */
-    private void drop(Command command)
+    private String drop(Command command)
     {
         if(!command.hasSecondWord()) {
-            System.out.println("Drop what?");
-            return;
+            return "Drop what?";
         }
 
         String itemName = command.getSecondWord();
         Item droppedItem = player.dropItem(itemName);
 
         if(droppedItem == null) {
-            System.out.println("You don't have one of those.");
+            return "You don't have one of those.";
         }
         else {
-            System.out.println("You dropped " + droppedItem.getDescription());
             player.getCurrentRoom().addItem(droppedItem);
+            return "You dropped " + droppedItem.getDescription();
         }
     }
 
     /**
-     * Prints out the details of all of the items that the player is
+     * Get details about all of the items that the player is
      * currently carrying
+     * @return A message about the items the player is carrying
      */
-    private void showItems()
+    private String showItems()
     {
-        System.out.println(player.getCurrentItemDetails());
+        return player.getCurrentItemDetails();
     }
 
     /**
-     * Prints out the players current stats
+     * Get the players current stats
+     * @return A message about the players current stats
      */
-    private void showStats()
+    private String showStats()
     {
-        System.out.println(player.getStats());
-    }
-
-    /**
-     * Charges the beamer. The beamer memorizes the location of the players
-     * current room.
-     * @param command The command that was entered
-     */
-    private void chargeBeamer(Command command)
-    {
-        if(!command.hasSecondWord()) {
-            System.out.println("Charge what?");
-            return;
-        }
-
-        String itemToCharge = command.getSecondWord();
-
-        if(!itemToCharge.equals("beamer")) {
-            System.out.println("That item can't be charged.");
-        }
-        else {
-            System.out.println("Beamer charged!");
-            player.setBeamerLocation();
-            player.setBeamerCharge(true);
-        }
-    }
-
-    /**
-     * Fires the beamer. Returns the player to the location at which the
-     * beamer was last charged.
-     * @param command The command that was entered
-     */
-    private void fireBeamer(Command command)
-    {
-        if(!command.hasSecondWord()) {
-            System.out.println("Fire what?");
-            return;
-        }
-
-        String itemToFire = command.getSecondWord();
-
-        if(!itemToFire.equals("beamer")) {
-            System.out.println("That item can't be fired.");
-        }
-        else if(player.getBeamerCharge() == false){
-            System.out.println("Your beamer isn't charged!");
-        }
-        else {
-            System.out.println("Beamer fired!");
-            enterRoom(player.getBeamerLocation(), true);
-        }
+        return player.getStats();
     }
 
     /**
      * Talk a character
      * @param command The command that was entered
+     * @return A message to display in the console
      */
-    public void talk(Command command)
+    public String talk(Command command)
     {
         if(!command.hasSecondWord()){
-            System.out.println("Talk to who?");
+            return "Talk to who?";
         }
 
         String characterName = command.getSecondWord();
         Character character = player.getCurrentRoom().getCharacter(characterName);
 
         if(character == null) {
-            System.out.println("That is not someone who can be spoken to.");
+            return "That is not someone who can be spoken to.";
         }
         else {
-            System.out.println(character.getInitialDialog());
+            return character.getInitialDialog();
         }
     }
 
     /**
      * Gives the item to the specified character
      * @param command The command that was entered
-     *
+     * @return A message to display in the console
      */
-    public void giveItem(Command command)
+    public String giveItem(Command command)
     {
+        StringBuilder buffer = new StringBuilder();
+
         if(!command.hasSecondWord()){
-            System.out.println("Give what... to who...?");
-            return;
+            return "Give what... to who...?";
         }
 
         if(!command.hasThirdWord()){
-            System.out.println("Give it to who?");
-            return;
+            return "Give it to who?";
         }
 
         String characterName = command.getThirdWord();
         Character character = player.getCurrentRoom().getCharacter(characterName);
 
         if(character == null) {
-            System.out.println("Who is \"" + characterName + "\" ?");
-            return;
+            return "Who is \"" + characterName + "\" ?";
         }
 
         String itemSoughtName = character.getItemSought();
@@ -610,16 +540,104 @@ public class Game
         Item itemForReward = character.getItemForReward();
 
         if(itemToGive == null) {
-            System.out.println("You don't have a(n) \"" + itemToGiveName + "\"");
+            return "You don't have a(n) \"" + itemToGiveName + "\"";
         }
         else if(itemToGive.getName().equals(itemSoughtName)) {
             player.dropItem(itemToGiveName);
-            System.out.println(character.getAcceptanceDialog());
+            buffer.append(character.getAcceptanceDialog()).append("\n");
             player.takeItem(itemForReward);
-            System.out.println("Received " + itemForReward.getDescription() + "!");
+            buffer.append("Received " + itemForReward.getDescription() + "!").append("\n");
+            return buffer.toString();
         }
         else {
-            System.out.println(characterName + " doesn't want your " + itemToGiveName);
+            return characterName + " doesn't want your " + itemToGiveName;
+        }
+    }
+
+    /**
+     * Charges the beamer. The beamer memorizes the location of the players
+     * current room.
+     * @param command The command that was entered
+     * @return A message to display in the console
+     */
+    private String chargeBeamer(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            return "Charge what?";
+        }
+
+        String itemToCharge = command.getSecondWord();
+
+        if(!itemToCharge.equals("beamer")) {
+            return "That item can't be charged.";
+        }
+        else {
+            player.setBeamerLocation();
+            player.setBeamerCharge(true);
+            return "Beamer charged!";
+        }
+    }
+
+    /**
+     * Fires the beamer. Returns the player to the location at which the
+     * beamer was last charged.
+     * @param command The command that was entered
+     * @return A message to display in the console
+     */
+    private String fireBeamer(Command command)
+    {
+        StringBuilder buffer = new StringBuilder();
+        if(!command.hasSecondWord()) {
+            return "Fire what?";
+        }
+
+        String itemToFire = command.getSecondWord();
+
+        if(!itemToFire.equals("beamer")) {
+            return "That item can't be fired.";
+        }
+        else if(player.getBeamerCharge() == false){
+            return "Your beamer isn't charged!";
+        }
+        else {
+            buffer.append("Beamer fired!").append("\n");
+            buffer.append(enterRoom(player.getBeamerLocation(), true)).append("\n");
+            return buffer.toString();
+        }
+    }
+
+    /**
+     * "Back" was entered. Takes the player back to the previous room they
+     * were in.
+     * @param command The command that was entered
+     * @return A message to display in the console
+     */
+    private String goBack(Command command)
+    {
+        if(command.hasSecondWord()) {
+            return ("\"back\" command does not allow a second word.");
+        }
+        if(player.getRoomHistory().empty()) {
+            return "There is nowhere to go back to.";
+        }
+        else {
+            return enterRoom(player.getPreviousRoom(), false);
+        }
+    }
+
+    /**
+     * "Quit" was entered. Check the rest of the command to see
+     * whether we really quit the game.
+     * @return A message to display in the console
+     */
+    private String quit(Command command)
+    {
+        if(command.hasSecondWord()) {
+            return "Quit what?";
+        }
+        else {
+            endGame();
+            return "Thank you for playing.  Good bye.";
         }
     }
 }
