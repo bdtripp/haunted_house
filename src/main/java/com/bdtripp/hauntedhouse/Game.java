@@ -143,7 +143,7 @@ public class Game
      * information about the room a player is in. 
      * @return The welcome message 
      */
-    private String getWelcomeMessage()
+    public String getWelcomeMessage()
     {
         StringBuilder buffer = new StringBuilder();
 
@@ -179,7 +179,7 @@ public class Game
      * @param command The command to be processed.
      * @return A message to display
      */
-    private String processCommand(Command command)
+    public String processCommand(Command command)
     {
         if(command.isUnknown()) {
             return "I don't know what you mean...";
@@ -223,10 +223,12 @@ public class Game
             return fireBeamer(command);
         }
         else if(commandWord.equals("back")) {
-            goBack(command);
+            return goBack(command);
         }
         else if(commandWord.equals("quit")) {
-            quit(command);
+            return quit(command);
+        } else {
+            return "";
         }
     }
 
@@ -347,8 +349,8 @@ public class Game
         }
         else {
             if(player.getMovesLeft() == 0) {
-                return "You ran out of moves! Game Over...";
                 endGame();
+                return "You ran out of moves! Game Over...";
             }
             return enterRoom(nextRoom, true);
         }
@@ -635,6 +637,7 @@ public class Game
         }
         else {
             endGame();
+            return "Thank you for playing.  Good bye.";
         }
     }
 }

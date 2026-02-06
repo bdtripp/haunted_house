@@ -19,3 +19,6 @@ out/
 
 # Generated Javadoc
 doc/
+
+# Maven build artifacts
+target/
