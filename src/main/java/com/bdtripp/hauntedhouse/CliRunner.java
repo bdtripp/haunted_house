@@ -2,7 +2,7 @@ package com.bdtripp.hauntedhouse;
 
 public class CliRunner
 {
-    private Parser parser = new Parser();
+    private Parser parser = new Parser(System.in);
     private Game game = new Game();
 
     /**

@@ -1,6 +1,7 @@
 package com.bdtripp.hauntedhouse;
 
 import java.util.Scanner;
+import java.io.InputStream;
 
 /**
  * This class is part of the "Haunted House" application.
@@ -16,7 +17,7 @@ import java.util.Scanner;
  * returns a command object that is marked as an unknown command.
  *
  * @author  Michael Kölling, David J. Barnes, and Brian Tripp
- * @version 2020.06.13
+ * @version 2026.02.06
  */
 public class Parser
 {
@@ -26,10 +27,25 @@ public class Parser
     /**
      * Create a parser to read from the terminal window.
      */
-    public Parser()
+    // public Parser()
+    // {
+    //     commands = new CommandWords();
+    //     reader = new Scanner(System.in);
+    // }
+
+    private Parser(Scanner reader)
     {
         commands = new CommandWords();
-        reader = new Scanner(System.in);
+        this.reader = reader;
+    }
+
+    public Parser(String string) {
+        this(new Scanner(string));
+    }
+
+    public Parser(InputStream inputStream)
+    {
+        this(new Scanner(inputStream));
     }
 
     /**
