@@ -10,8 +10,7 @@ import java.util.Random;
  *  explore rooms in a haunted house. The goal of the game is to try to find
  *  your way out of the house.
  *
- *  This main class creates and initialises all the others: it creates all
- *  rooms, creates the parser and starts the game.  It also evaluates and
+ *  This class creates and initialises all the others. It also evaluates and
  *  executes the commands that the parser returns.
  *
  * @author  Michael Kölling, David J. Barnes, and Brian Tripp
@@ -20,7 +19,6 @@ import java.util.Random;
 
 public class Game
 {
-    private Parser parser;
     private Player player;
     private ArrayList<Room> rooms;
     private boolean gameOver;
@@ -31,7 +29,6 @@ public class Game
     public Game()
     {
         player = new Player("Brian", 75);
-        parser = new Parser();
         rooms = new ArrayList<>();
         createRooms();
     }
@@ -245,7 +242,7 @@ public class Game
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("Your command words are:").append("\n");
-        buffer.append(parser.getCommands()).append("\n\n");
+        buffer.append(CommandWords.getCommandList()).append("\n\n");
 
         buffer.append("How to use the commands:").append("\n\n");
 

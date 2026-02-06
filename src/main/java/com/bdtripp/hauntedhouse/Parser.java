@@ -24,26 +24,17 @@ public class Parser
     private CommandWords commands;  // holds all valid command words
     private Scanner reader;         // source of command input
 
-    /**
-     * Create a parser to read from the terminal window.
-     */
-    // public Parser()
-    // {
-    //     commands = new CommandWords();
-    //     reader = new Scanner(System.in);
-    // }
-
-    private Parser(Scanner reader)
+    private Parser(Scanner reader) // shared constructor for both CLI and web
     {
         commands = new CommandWords();
         this.reader = reader;
     }
 
-    public Parser(String string) {
+    public Parser(String string) {  // for the Web App
         this(new Scanner(string));
     }
 
-    public Parser(InputStream inputStream)
+    public Parser(InputStream inputStream) // for the CLI App
     {
         this(new Scanner(inputStream));
     }
@@ -57,8 +48,6 @@ public class Parser
         String word1 = null;
         String word2 = null;
         String word3 = null;
-
-        System.out.print("> ");     // print prompt
 
         inputLine = reader.nextLine();
 
@@ -82,14 +71,5 @@ public class Parser
         else {
             return new Command(null, word2, word3);
         }
-    }
-
-    /**
-     * Get a list of valid command words.
-     * @return A list of valid command words separated by spaces
-     */
-    public String getCommands()
-    {
-        return commands.getCommandList();
     }
 }

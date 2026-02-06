@@ -46,7 +46,7 @@ public class CommandWords
      * Get a list of all valid commands
      * @return A list of all valid commands separated by spaces
      */
-    public String getCommandList()
+    public static String getCommandList()
     {
         String commandString = "";
         for(String command : VALID_COMMANDS) {

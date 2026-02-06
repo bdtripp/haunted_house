@@ -27,6 +27,7 @@ public class CliRunner
         // execute them until the game is over.
 
         while(!game.isGameOver()) {
+            System.out.print("> ");     // print prompt
             Command command = parser.getCommand();
             String output = game.processCommand(command);
             if (!output.isEmpty()) {
