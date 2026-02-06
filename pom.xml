@@ -52,7 +52,6 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
                         <exclude>**/SessionController.java</exclude>
                         <exclude>**/GameSession.java</exclude>
                         <exclude>**/GameService.java</exclude>
-                        <!-- add more patterns if needed -->
                     </excludes>
                 </configuration>
             </plugin>

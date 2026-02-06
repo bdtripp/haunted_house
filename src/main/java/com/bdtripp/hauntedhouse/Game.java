@@ -169,7 +169,7 @@ public class Game
         
         buffer.append(player.getCurrentRoom().getLongDescription()).append("\n");
         buffer.append(player.getCurrentRoom().getItemsInRoomDetails()).append("\n");
-        buffer.append(player.getCurrentRoom().getCharactersInRoomDetails()).append("\n");
+        buffer.append(player.getCurrentRoom().getCharactersInRoomDetails());
 
         return buffer.toString();
     }
