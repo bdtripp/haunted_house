@@ -4,12 +4,36 @@
   padding: 0;
 }
 
+main {
+    display: grid;
+    justify-content: center;
+    gap: 40px;
+    margin: 40px;
+    font-family: "JetBrains Mono", monospace;
+}
+
+h1 {
+    text-align: center;
+}
+
 div#terminal {
     background-color: black;
     color: white;
+    width: 800px;
+    height: 400px;
+    display: grid;
+    padding: 10px;
+    border-radius: 10px;
+    align-content: start;
+}
+
+div#input-area {
+    display: flex;
+    align-items: start;
 }
 
 input#terminal-input {
     all: unset; /* wipe most browser styles */
+    width: 100%;
 }
 
