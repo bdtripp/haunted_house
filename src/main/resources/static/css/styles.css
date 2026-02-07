@@ -1,0 +1,15 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+div#terminal {
+    background-color: black;
+    color: white;
+}
+
+input#terminal-input {
+    all: unset; /* wipe most browser styles */
+}
+
