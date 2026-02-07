@@ -23,7 +23,7 @@ public class Player
     private ArrayList<Item> items;
     private Room currentRoom;
     private Stack<Room> roomHistory;
-    private static final int maxMovesAllowed = 30;
+    private static final int MAX_MOVES_ALLOWED = 30;
     private Room beamerLocation;
     private boolean beamerCharged;
 
@@ -234,7 +234,7 @@ public class Player
      */
     public int getMovesLeft()
     {
-        return maxMovesAllowed - roomHistory.size();
+        return MAX_MOVES_ALLOWED - roomHistory.size();
     }
 
     /**

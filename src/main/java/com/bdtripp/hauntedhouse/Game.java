@@ -10,8 +10,7 @@ import java.util.Random;
  *  explore rooms in a haunted house. The goal of the game is to try to find
  *  your way out of the house.
  *
- *  This main class creates and initialises all the others: it creates all
- *  rooms, creates the parser and starts the game.  It also evaluates and
+ *  This class creates and initialises all the others. It also evaluates and
  *  executes the commands that the parser returns.
  *
  * @author  Michael Kölling, David J. Barnes, and Brian Tripp
@@ -20,7 +19,6 @@ import java.util.Random;
 
 public class Game
 {
-    private Parser parser;
     private Player player;
     private ArrayList<Room> rooms;
     private boolean gameOver;
@@ -31,7 +29,6 @@ public class Game
     public Game()
     {
         player = new Player("Brian", 75);
-        parser = new Parser();
         rooms = new ArrayList<>();
         createRooms();
     }
@@ -244,73 +241,74 @@ public class Game
     {
         StringBuilder buffer = new StringBuilder();
 
-        buffer.append("Your command words are: \n");
-        buffer.append(parser.getCommands() + "\n");
+        buffer.append("Your command words are:").append("\n");
+        buffer.append(CommandWords.getCommandList()).append("\n\n");
 
-        buffer.append("How to use the commands: \n");
+        buffer.append("How to use the commands:").append("\n\n");
 
-        buffer.append("go: Use to move from room to room");
-        buffer.append("Usage: type \"go\" + \"space\" + \"a direction\"");
-        buffer.append("Hint(s): Directions are north, south, east, or west\n");
+        buffer.append("go: Use to move from room to room.").append("\n");
+        buffer.append("Usage: type \"go\" + \"space\" + \"a direction\"").append("\n");
+        buffer.append("Hint(s): Directions are north, south, east, or west.").append("\n\n");
 
-        buffer.append("quit: Use to quit the program");
-        buffer.append("Usage: type \"quit\"");
-        buffer.append("Hint(s): N/A\n");
+        buffer.append("quit: Use to quit the program.").append("\n");
+        buffer.append("Usage: type \"quit\"").append("\n");
+        buffer.append("Hint(s): N/A").append("\n\n");
 
-        buffer.append("help: Use to get information on how to play the game ");
-        buffer.append("Usage: type \"help\"");
-        buffer.append("Hint(s): N/A\n");
+        buffer.append("help: Use to get information on how to play the game.").append("\n");
+        buffer.append("Usage: type \"help\"").append("\n");
+        buffer.append("Hint(s): N/A").append("\n\n");
 
-        buffer.append("look: Use to get a description of your location and directions that you are able to travel in");
-        buffer.append("Usage: type \"look\"");
-        buffer.append("Hint(s): N/A\n");
+        buffer.append("look: Use to get a description of your location and directions " + 
+            "that you are able to travel in.").append("\n");
+        buffer.append("Usage: type \"look\"").append("\n");
+        buffer.append("Hint(s): N/A").append("\n\n");
 
-        buffer.append("eat: Use to eat an item. Eating an item can boost your stats. Not all items are edible.");
-        buffer.append("Usage: type \"eat\" + \"space\" + \"the name of the item you want to eat\"");
-        buffer.append("Hint(s): example command - \"eat potion\"\n");
+        buffer.append("eat: Use to eat an item. Eating an item can boost your stats. Not all items are edible.").append("\n");
+        buffer.append("Usage: type \"eat\" + \"space\" + \"the name of the item you want to eat\"").append("\n");
+        buffer.append("Hint(s): example command - \"eat potion\".").append("\n\n");
 
-        buffer.append("back: Use to backtrack consecutively through the rooms that you were just in");
-        buffer.append("Usage: type \"back\"");
-        buffer.append("Hint(s): N/A\n");
+        buffer.append("back: Use to backtrack consecutively through the rooms that you were just in.").append("\n");
+        buffer.append("Usage: type \"back\"").append("\n");
+        buffer.append("Hint(s): N/A").append("\n\n");
 
-        buffer.append("take: If you find an item in a room, you can use the \"take\" command to pick up the item");
-        buffer.append("Usage: type \"take\" + \"space\" + \"the name of the item you want to pick up\"");
-        buffer.append("Hint(s): N/A\n");
+        buffer.append("take: If you find an item in a room, you can use the \"take\" command to pick up the item.").append("\n");
+        buffer.append("Usage: type \"take\" + \"space\" + \"the name of the item you want to pick up\"").append("\n");
+        buffer.append("Hint(s): N/A").append("\n\n");
 
-        buffer.append("drop: Use to drop an item that you are carrying.");
-        buffer.append("Usage: type \"drop\" + \"space\" + \"the name of the item you want to drop\"");
-        buffer.append("Hint(s): You may want to drop an item since you can only carry so much weight\n");
+        buffer.append("drop: Use to drop an item that you are carrying.").append("\n");
+        buffer.append("Usage: type \"drop\" + \"space\" + \"the name of the item you want to drop\"").append("\n");
+        buffer.append("Hint(s): You may want to drop an item since you can only carry so much weight.").append("\n\n");
 
-        buffer.append("items: Use to print a list of items that you are carrying and descriptions of each item");
-        buffer.append("Usage: type \"items\"");
-        buffer.append("Hint(s): N/A\n");
+        buffer.append("items: Use to print a list of items that you are carrying and descriptions of each item.").append("\n");
+        buffer.append("Usage: type \"items\"").append("\n");
+        buffer.append("Hint(s): N/A").append("\n\n");
 
-        buffer.append("stats: Use to print a list of the players current stats");
-        buffer.append("Usage: type \"stats\"");
-        buffer.append("Hint(s): This command will display information such as health, strength, and maximum carry weight.\n");
+        buffer.append("stats: Use to print a list of the players current stats.").append("\n");
+        buffer.append("Usage: type \"stats\"").append("\n");
+        buffer.append("Hint(s): This command will display information such as health, strength, and " + 
+            "maximum carry weight.").append("\n\n");
 
-        buffer.append("charge: Use to charge an item");
-        buffer.append("Usage: type \"charge\" + \"space\" + \"the name of the item you want to charge\"");
+        buffer.append("charge: Use to charge an item.").append("\n");
+        buffer.append("Usage: type \"charge\" + \"space\" + \"the name of the item you want to charge\"").append("\n");
         buffer.append("Hint(s): You will need to charge your beamer before firing it. " +
-                "Charge the beamer in a room that you want to use as a return point. Later when you fire the beamer, " +
-                "it will send you back to the room that you charged it in originally.\n"
-        );
+            "Charge the beamer in a room that you want to use as a return point. Later when you fire the beamer, " +
+            "it will send you back to the room that you charged it in originally.").append("\n\n");
 
-        buffer.append("fire: ");
-        buffer.append("Usage: type \"fire\" + \"space\" + \"the name of the item you want to fire\"");
+        buffer.append("fire: Use to fire an item.").append("\n");
+        buffer.append("Usage: type \"fire\" + \"space\" + \"the name of the item you want to fire\"").append("\n");
         buffer.append("Hint(s): You will need to charge your beamer before firing it. " +
-                "Charge the beamer in a room that you want to use as a return point. Later when you fire the beamer, " +
-                "it will send you back to the room that you charged it in originally.\n"
-        );
+            "Charge the beamer in a room that you want to use as a return point. Later when you fire the beamer, " +
+            "it will send you back to the room that you charged it in originally.").append("\n\n");
 
-        buffer.append("talk: If there is a character in a room, you can use this command to talk to them.");
-        buffer.append("Usage: type \"talk\" + \"space\" + \"the name of the person you want to talk to\"");
-        buffer.append("Hint(s): N/A\n");
+        buffer.append("talk: If there is a character in a room, you can use this command to talk to them.").append("\n");
+        buffer.append("Usage: type \"talk\" + \"space\" + \"the name of the person you want to talk to\"").append("\n");
+        buffer.append("Hint(s): N/A").append("\n\n");
 
-        buffer.append("give: Use to give an item to a Character");
+        buffer.append("give: Use to give an item to a Character.").append("\n");
+        buffer.append("Usage: type \"give\" + \"space\" + \"the name of the item you want to give\"" + 
+            " + \"space\" + \"the name of the character you want to give it to\".").append("\n");
         buffer.append("Hint(s): Certain characters will give you a reward in exchange for giving them an item that you found. " +
-                "You must be in the same room as the Character that you want to give an item to.\n"
-        );
+            "You must be in the same room as the Character that you want to give an item to.");
 
         return buffer.toString();
     }

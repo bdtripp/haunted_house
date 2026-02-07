@@ -2,7 +2,7 @@ package com.bdtripp.hauntedhouse;
 
 public class CliRunner
 {
-    private Parser parser = new Parser();
+    private Parser parser = new Parser(System.in);
     private Game game = new Game();
 
     /**
@@ -27,10 +27,11 @@ public class CliRunner
         // execute them until the game is over.
 
         while(!game.isGameOver()) {
+            System.out.print("> ");     // print prompt
             Command command = parser.getCommand();
             String output = game.processCommand(command);
             if (!output.isEmpty()) {
-                System.out.println(output);
+                System.out.println(output + "\n");
             }
         }
     }
