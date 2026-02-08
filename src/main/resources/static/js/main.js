@@ -6,14 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('/api/game/command', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ "command": e.target.value }),
+                body: JSON.stringify({ "input": e.target.value }),
             });
 
             if (!response.ok) {
                 throw new Error(`Request failed: ${response.status}`);
             }
 
-            response.json(); // or response.text() etc.
+            const text = await response.json();
+            console.log(text.output); // or response.text() etc.
         }
     });
 });

@@ -21,6 +21,6 @@ public class GameController
     @PostMapping("/command")
     public GameResponse executeCommand(@RequestBody GameRequest request) 
     {
-        return GameResponse(gameService.execute(request));
+        return new GameResponse(gameService.execute(request));
     }
 }
