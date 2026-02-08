@@ -25,6 +25,11 @@ div#terminal {
     padding: 10px;
     border-radius: 10px;
     align-content: start;
+    overflow: scroll;
+}
+
+#output {
+    white-space: pre-line;
 }
 
 div#input-area {
