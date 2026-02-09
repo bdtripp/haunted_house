@@ -3,7 +3,7 @@ package com.bdtripp.hauntedhouse;
 public class CliRunner
 {
     private Parser parser = new Parser(System.in);
-    private Game game = new Game();
+    private GameEngine gameEngine = new GameEngine();
 
     /**
      * The main class of the CLI version of Haunted House. 
@@ -21,15 +21,15 @@ public class CliRunner
 
     private void run(String[] args)
     {
-        System.out.println(game.getWelcomeMessage());
+        System.out.println(gameEngine.getWelcomeMessage());
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
 
-        while(!game.isGameOver()) {
+        while(!gameEngine.isGameOver()) {
             System.out.print("> ");     // print prompt
             Command command = parser.getCommand();
-            String output = game.processCommand(command);
+            String output = gameEngine.processCommand(command);
             if (!output.isEmpty()) {
                 System.out.println(output + "\n");
             }

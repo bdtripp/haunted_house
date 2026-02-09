@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *  This is the Game Class of the "Haunted House" application.
+ *  This is the GameEngine Class of the "Haunted House" application.
  *
  *  "Haunted House" is a text based adventure game in which the user can
  *  explore rooms in a haunted house. The goal of the game is to try to find
@@ -17,16 +17,16 @@ import java.util.Random;
  * @version 2026.02.05
  */
 
-public class Game
+public class GameEngine
 {
     private Player player;
     private ArrayList<Room> rooms;
     private boolean gameOver;
 
     /**
-     * Create the game and initialise its internal map.
+     * Create the GameEngine and initialise its internal map.
      */
-    public Game()
+    public GameEngine()
     {
         player = new Player("Brian", 75);
         rooms = new ArrayList<>();

@@ -3,20 +3,35 @@ package com.bdtripp.hauntedhouse.service;
 import com.bdtripp.hauntedhouse.Parser;
 import com.bdtripp.hauntedhouse.Command;
 import com.bdtripp.hauntedhouse.api.GameRequest;
-import com.bdtripp.hauntedhouse.Game;
+import com.bdtripp.hauntedhouse.api.GameResponse;
+import com.bdtripp.hauntedhouse.GameEngine;
 import com.bdtripp.hauntedhouse.Parser;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GameService
 {
-    private final Game game = new Game();
+    private GameEngine gameEngine;
     private Parser parser;
 
-    public String execute(GameRequest request)
+    public GameResponse startGame()
     {
-        parser = new Parser(request.getInput());
+        gameEngine = new GameEngine();
+        return new GameResponse(gameEngine.getWelcomeMessage() + "\n", "running");
+    }
+
+    public GameResponse execute(GameRequest request)
+    {
+        String input = request.getInput();
+        parser = new Parser(input);
         Command command = parser.getCommand();
-        return game.processCommand(command);
+        String cmdResult = gameEngine.processCommand(command);
+        String output = "> " + input + "\n" + cmdResult + "\n\n";
+        if(gameEngine.isGameOver())
+        {
+            gameEngine = new GameEngine();
+            return new GameResponse(output, "quit");
+        }
+        return new GameResponse(output, "running");
     }
 }

@@ -18,9 +18,15 @@ public class GameController
         this.gameService = gameService;
     }
 
+    @PostMapping("/start")
+    public GameResponse start()
+    {
+        return gameService.startGame();
+    }
+
     @PostMapping("/command")
     public GameResponse executeCommand(@RequestBody GameRequest request) 
     {
-        return GameResponse(gameService.execute(request));
+        return gameService.execute(request);
     }
 }
