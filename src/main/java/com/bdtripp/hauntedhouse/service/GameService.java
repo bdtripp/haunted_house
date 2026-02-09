@@ -30,7 +30,6 @@ public class GameService
         String output = "> " + input + "\n" + cmdResult + "\n\n";
         if(gameEngine.isGameOver())
         {
-            gameEngine = new GameEngine();
             return new GameResponse(output, GameStatus.STOPPED);
         }
         return new GameResponse(output, GameStatus.RUNNING);
