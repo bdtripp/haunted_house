@@ -9,18 +9,38 @@ import com.bdtripp.hauntedhouse.GameStatus;
 import com.bdtripp.hauntedhouse.Parser;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service layer for the Haunted House web application.
+ * 
+ * The GameService acts as an interface between the GameController and the GameEngine. This
+ * class contains code that is unique to the web version of the game and is a counterpart to
+ * the CliRunner class. The CliRunner receives input and prints output to the terminal,
+ * whereas the GameService receives requests from the controller and returns responses to
+ * it and does not print anything. 
+ */
+
 @Service
 public class GameService
 {
     private GameEngine gameEngine;
     private Parser parser;
 
+    /**
+     * Creates a GameEngine and returns a welcome message.
+     * @return A welcome message and status of the game
+     */
     public GameResponse startGame()
     {
         gameEngine = new GameEngine();
         return new GameResponse(gameEngine.getWelcomeMessage() + "\n", GameStatus.RUNNING);
     }
 
+    /**
+     * Parses the players input, converts it into a command, and executes it. Returns output 
+     * to the GameController along with the game's status. 
+     * @param request The request that came from the GameController
+     * @return A response that is handed off to the GameController
+     */
     public GameResponse execute(GameRequest request)
     {
         String input = request.getInput();
