@@ -1,9 +1,24 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    const inputLabel = document.querySelector('label[for="terminal-input"');
     const input = document.querySelector('#terminal-input');
     const outputElement = document.querySelector('#output');
     const newGameBtn = document.querySelector('#new-game-btn');
+    const STATUS = {
+        RUNNING: "RUNNING",
+        STOPPED: "STOPPED"
+    };
+
+    const startGame = async () => {
+        input.disabled = false;
+        inputLabel.style.display = "initial";
+        const response = await fetch('api/game/start', {
+            method: 'POST'
+        });
+        const data = await response.json();
+        outputElement.textContent = data.output + "\n";
+    }
     
-    startGame(outputElement);
+    startGame();
 
     input.addEventListener('keydown', async (e) => {
         const terminal = document.querySelector('#terminal');
@@ -24,18 +39,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             outputElement.textContent += data.output;
             terminal.scrollTop = terminal.scrollHeight;
             input.value = '';
+            if (data.status === STATUS.STOPPED) {
+                input.disabled = true;
+                inputLabel.style.display = "none";
+                console.log(inputLabel);
+            }
         }
     });
 
     newGameBtn.addEventListener('click', async () => {
-        startGame(outputElement);
+        startGame();
     });
 });
-
-const startGame = async (outputElement) => {
-    const response = await fetch('api/game/start', {
-        method: 'POST'
-    });
-    const data = await response.json();
-    outputElement.textContent = data.output + "\n";
-}

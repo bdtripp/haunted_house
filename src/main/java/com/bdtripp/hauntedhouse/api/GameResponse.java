@@ -1,14 +1,17 @@
 package com.bdtripp.hauntedhouse.api;
 
+import com.bdtripp.hauntedhouse.GameStatus;
+
 public class GameResponse {
     private String output;
-    private String status;
+    private GameStatus status;
 
     public GameResponse() {}
 
-    public GameResponse(String output)
+    public GameResponse(String output, GameStatus status)
     {
         this.output = output;
+        this.status = status;
     }
 
     public String getOutput()
@@ -21,12 +24,12 @@ public class GameResponse {
         this.output = output;
     }
 
-    public String getStatus()
+    public GameStatus getStatus()
     {
         return status;
     }
 
-    public void setStatus(String status)
+    public void setStatus(GameStatus status)
     {
         this.status = status;
     }

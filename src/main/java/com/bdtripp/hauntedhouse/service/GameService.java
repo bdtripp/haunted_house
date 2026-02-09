@@ -5,6 +5,7 @@ import com.bdtripp.hauntedhouse.Command;
 import com.bdtripp.hauntedhouse.api.GameRequest;
 import com.bdtripp.hauntedhouse.api.GameResponse;
 import com.bdtripp.hauntedhouse.GameEngine;
+import com.bdtripp.hauntedhouse.GameStatus;
 import com.bdtripp.hauntedhouse.Parser;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class GameService
     public GameResponse startGame()
     {
         gameEngine = new GameEngine();
-        return new GameResponse(gameEngine.getWelcomeMessage() + "\n", "running");
+        return new GameResponse(gameEngine.getWelcomeMessage() + "\n", GameStatus.RUNNING);
     }
 
     public GameResponse execute(GameRequest request)
@@ -30,8 +31,8 @@ public class GameService
         if(gameEngine.isGameOver())
         {
             gameEngine = new GameEngine();
-            return new GameResponse(output, "quit");
+            return new GameResponse(output, GameStatus.STOPPED);
         }
-        return new GameResponse(output, "running");
+        return new GameResponse(output, GameStatus.RUNNING);
     }
 }
