@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- * This class is part of the "Haunted House" application.
- * "Haunted House" is a text based adventure game.
+ * The controller layer for the Haunted House web app.
  *
- * The GameController class contains the API endpoints that connect the webpage
+ * This class contains the API endpoints that connect the webpage
  * front end with the back end game engine. 
  *
  * @author  Brian Tripp

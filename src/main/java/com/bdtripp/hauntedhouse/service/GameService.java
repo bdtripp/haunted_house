@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
  * the CliRunner class. The CliRunner receives input and prints output to the terminal,
  * whereas the GameService receives requests from the controller and returns responses to
  * it and does not print anything. 
+ * 
+ * @author  Brian Tripp
+ * @version 2026.02.09
  */
 
 @Service

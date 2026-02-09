@@ -3,8 +3,8 @@ package com.bdtripp.hauntedhouse;
 /**
  * Class Character - a character in the haunted house.
  *
- * This class is part of the "Haunted House" application.
- * "Haunted House" is a text based adventure game.
+ * This class is part of the Haunted House application.
+ * Haunted House is a text based adventure game.
  *
  * A "Character" represents a character that the player can interact with.
  * A character may offer to help the player in exchange for certain items.

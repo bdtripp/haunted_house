@@ -1,8 +1,8 @@
 package com.bdtripp.hauntedhouse;
 
 /**
- * This class is part of the "Haunted House" application.
- * "Haunted House" is a text based adventure game.
+ * This class is part of the Haunted House application.
+ * Haunted House is a text based adventure game.
  *
  * This class holds information about a command that was issued by the user.
  * A command currently consists of three strings: a command word, a second
