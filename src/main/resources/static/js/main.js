@@ -1,12 +1,9 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const input = document.querySelector('#terminal-input');
     const outputElement = document.querySelector('#output');
-
-    const response = await fetch('api/game/start', {
-        method: 'POST'
-    });
-    const data = await response.json();
-    console.log(data.output);
+    const newGameBtn = document.querySelector('#new-game-btn');
+    
+    startGame(outputElement);
 
     input.addEventListener('keydown', async (e) => {
         const terminal = document.querySelector('#terminal');
@@ -29,4 +26,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             input.value = '';
         }
     });
+
+    newGameBtn.addEventListener('click', async () => {
+        startGame(outputElement);
+    });
 });
+
+const startGame = async (outputElement) => {
+    const response = await fetch('api/game/start', {
+        method: 'POST'
+    });
+    const data = await response.json();
+    outputElement.textContent = data.output + "\n";
+}

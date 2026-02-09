@@ -21,12 +21,12 @@ public class GameController
     @PostMapping("/start")
     public GameResponse start()
     {
-        return new GameResponse(gameService.startGame());
+        return gameService.startGame();
     }
 
     @PostMapping("/command")
     public GameResponse executeCommand(@RequestBody GameRequest request) 
     {
-        return new GameResponse(gameService.execute(request));
+        return gameService.execute(request);
     }
 }

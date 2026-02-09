@@ -171,7 +171,7 @@ public class Room
         for(Item item : items) {
             returnString += item.getDescription() +
                     "(weight: " + item.getWeight() + ") To take item use the" +
-                    " command: take " + item.getName() + "\n";
+                    " command: take " + item.getName();
         }
         return returnString;
     }
@@ -189,7 +189,7 @@ public class Room
         }
         returnString += "Characters:\n";
         for(Character character : characters) {
-            returnString += character.getName() + "\n";
+            returnString += character.getName();
         }
         return returnString;
     }
