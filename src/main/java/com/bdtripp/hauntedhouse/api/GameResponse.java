@@ -9,7 +9,7 @@ import com.bdtripp.hauntedhouse.GameStatus;
  *  output from the GameEngine and the game's current status.
  *  The GameResponse is then sent to the client.
  *
- * @author  Michael Kölling, David J. Barnes, and Brian Tripp
+ * @author  Brian Tripp
  * @version 2026.02.09
  */
 

@@ -1,13 +1,10 @@
 package com.bdtripp.hauntedhouse;
 
 /**
- * Class Character - a character in the haunted house.
+ * Represents a character in the Haunted House game.
  *
- * This class is part of the Haunted House application.
- * Haunted House is a text based adventure game.
- *
- * A "Character" represents a character that the player can interact with.
- * A character may offer to help the player in exchange for certain items.
+ * Players can interact with characters and a character may offer to help the Player
+ * in exchange for certain items.
  *
  * @author Brian Tripp
  * @version 2020.06.13
@@ -21,12 +18,13 @@ public class Character
     private Item itemForReward;
 
     /**
-     * Constructor for objects of class Character
-     * @param name The name of the character
-     * @param initialDialog The initial dialog that the character speaks
-     * @param acceptanceDialog The dialog that the character speaks upon accepting an item
-     * @param itemSought The name of the item that the character is seeking
-     * @param itemForReward The item that the character rewards the player with
+     * Create a character with a name, dialog, item they are seeking, and item they give
+     * as a reward. 
+     * @param name The name of the character.
+     * @param initialDialog The initial dialog that the character speaks.
+     * @param acceptanceDialog The dialog that the character speaks upon accepting an item.
+     * @param itemSought The name of the item that the character is seeking.
+     * @param itemForReward The item that the character rewards the player with.
      */
     public Character(
             String name,
@@ -44,8 +42,8 @@ public class Character
     }
 
     /**
-     * Get the name of the character
-     * @return The name of the character
+     * Returns the name of the character
+     * @return The name
      */
     public String getName()
     {
@@ -53,8 +51,8 @@ public class Character
     }
 
     /**
-     * Get the initial dialog that the character speaks
-     * @return The initial dialog that the character speaks
+     * Returns the initial dialog that the character speaks
+     * @return The initial dialog
      */
     public String getInitialDialog()
     {
@@ -62,8 +60,8 @@ public class Character
     }
 
     /**
-     * Get the dialog that the character speaks upon accepting an item
-     * @return The dialog that the character speaks upon accepting an item
+     * Returns the dialog that the character speaks upon accepting an item
+     * @return The acceptance dialog
      */
     public String getAcceptanceDialog()
     {
@@ -71,8 +69,8 @@ public class Character
     }
 
     /**
-     * Get the name of the item that the character is seeking
-     * @return The name of the item at the character is seeking
+     * Returns the name of the item that the character is seeking
+     * @return The name of the item
      */
     public String getItemSought()
     {
@@ -80,8 +78,8 @@ public class Character
     }
 
     /**
-     * Get the item that the character has as a reward
-     * @return The item that the character has as a reward
+     * Returns the item as a reward
+     * @return The item
      */
     public Item getItemForReward()
     {

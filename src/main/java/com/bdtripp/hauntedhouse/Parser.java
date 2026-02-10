@@ -29,11 +29,11 @@ public class Parser
         this.reader = reader;
     }
 
-    public Parser(String string) {  // for the Web App
+    public Parser(String string) {  // for the Web application
         this(new Scanner(string));
     }
 
-    public Parser(InputStream inputStream) // for the CLI App
+    public Parser(InputStream inputStream) // for the CLI application
     {
         this(new Scanner(inputStream));
     }

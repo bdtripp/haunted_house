@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- * The controller layer for the Haunted House web app.
+ * The controller layer for the Haunted House web application.
  *
  * This class contains the API endpoints that connect the webpage
  * front end with the back end game engine. 

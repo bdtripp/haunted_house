@@ -6,7 +6,7 @@ package com.bdtripp.hauntedhouse.api;
  *  A GameRequest is created when player input is received by the 
  *  GameController
  *
- * @author  Michael Kölling, David J. Barnes, and Brian Tripp
+ * @author  Brian Tripp
  * @version 2026.02.09
  */
 

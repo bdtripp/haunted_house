@@ -1,19 +1,17 @@
 package com.bdtripp.hauntedhouse;
 
 /**
- * This class is part of the Haunted House application.
- * Haunted House is a text based adventure game.
+ * Represents a command in the Haunted House game.
  *
- * This class holds information about a command that was issued by the user.
- * A command currently consists of three strings: a command word, a second
- * word, and a third word (for example, if the command was "give spade Beatrice", then the three strings
- * obviously are "give", "spade", and "Beatrice).
+ * Stores data about a command that was executed by the user.
+ * A command consists of three strings: a command word, a second
+ * word, and a third word (for example, if the command was "give spade Beatrice", 
+ * then the three strings are "give", "spade", and "Beatrice").
  *
- * The way this is used is: Commands are already checked for being valid
- * command words. If the user entered an invalid command (a word that is not
- * known) then the command word is <null>.
+ * Checks the validity of each command word. If the user entered an invalid command 
+ * then the command word is null.
  *
- * If the command had only one word, then the second and third words are <null>.
+ * If the command had only one word, then the second and third words are null.
  *
  * @author  Michael Kölling and David J. Barnes, Brian Tripp
  * @version 2020.06.13
@@ -26,10 +24,8 @@ public class Command
     private String thirdWord;
 
     /**
-     * Create a command object. First and second word must be supplied, but
-     * either one (or both) can be null.
-     * @param firstWord The first word of the command. Null if the command
-     *                  was not recognised.
+     * Create a command with three words. Words may be null.
+     * @param firstWord The first word of the command.
      * @param secondWord The second word of the command.
      * @param thirdWord The third word of the command.
      *
