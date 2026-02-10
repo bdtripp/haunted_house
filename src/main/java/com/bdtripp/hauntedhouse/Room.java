@@ -6,8 +6,8 @@ import java.util.ArrayList;
 /**
  * Class Room - a room in the haunted house.
  *
- * This class is part of the "Haunted House" application.
- * "Haunted House" is a text based adventure game.
+ * This class is part of the Haunted House application.
+ * Haunted House is a text based adventure game.
  *
  * A "Room" represents one location in the layout of the game.  It is
  * connected to other rooms via exits.  The exits are labelled north,

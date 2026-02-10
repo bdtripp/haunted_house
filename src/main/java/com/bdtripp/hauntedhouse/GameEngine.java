@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *  This is the GameEngine Class of the "Haunted House" application.
+ *  The GameEngine class of the Haunted House application.
  *
- *  "Haunted House" is a text based adventure game in which the user can
+ *  Haunted House is a text based adventure game in which the player can
  *  explore rooms in a haunted house. The goal of the game is to try to find
  *  your way out of the house.
- *
- *  This class creates and initialises all the others. It also evaluates and
- *  executes the commands that the parser returns.
+ * 
+ *  This class contains the core logic for the game that is shared by both the
+ *  web version (GameService) and the CLI version (CliRunner). It creates all
+ *  the rooms, items, characters, defines the exits for each room, and processes 
+ *  all Commands entered by the player.
  *
  * @author  Michael Kölling, David J. Barnes, and Brian Tripp
  * @version 2026.02.05

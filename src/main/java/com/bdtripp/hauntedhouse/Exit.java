@@ -1,16 +1,15 @@
 package com.bdtripp.hauntedhouse;
 
-//TODO add description of class below
 /**
  * Class Exit - an exit of a room
  *
- * This class is part of the "Haunted House" application.
- * "Haunted House" is a text based adventure game.
+ * This class is part of the Haunted House application.
+ * Haunted House is a text based adventure game.
  *
  * Exits are associated with a particular room and allow the character to move from one room to the next.
  * An exit can be located at one of four directions - north, east, south, or west. Exits can be either locked or unlocked.
  *
- * @Brian Tripp
+ * @author Brian Tripp
  * @version 2020.06.13
  */
 public class Exit

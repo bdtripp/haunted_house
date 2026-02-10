@@ -47,5 +47,6 @@ button#new-game-btn {
     padding: 20px;
     font-size: 1.5em;
     letter-spacing: 2px;
+    cursor: pointer;
 }
 
