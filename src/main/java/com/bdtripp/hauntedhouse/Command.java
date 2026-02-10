@@ -14,8 +14,8 @@ package com.bdtripp.hauntedhouse;
 public class Command
 {
     private CommandWord commandWord;
-    private CommandWord secondWord;
-    private CommandWord thirdWord;
+    private String secondWord;
+    private String thirdWord;
 
     /**
      * Create a command with three words. Words may be null.
@@ -24,7 +24,7 @@ public class Command
      * @param thirdWord The third word of the command.
      *
      */
-    public Command(CommandWord firstWord, CommandWord secondWord, CommandWord thirdWord)
+    public Command(CommandWord firstWord, String secondWord, String thirdWord)
     {
         commandWord = firstWord;
         this.secondWord = secondWord;
@@ -44,7 +44,7 @@ public class Command
      * @return The second word of this command. Returns null if there was no
      * second word.
      */
-    public CommandWord getSecondWord()
+    public String getSecondWord()
     {
         return secondWord;
     }
@@ -53,7 +53,7 @@ public class Command
      * @return The third word of this command. Returns null if there was no
      * third word.
      */
-    public CommandWord getThirdWord()
+    public String getThirdWord()
     {
         return thirdWord;
     }

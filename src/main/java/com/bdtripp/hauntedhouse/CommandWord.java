@@ -42,4 +42,21 @@ public enum CommandWord
                      .map(String::toLowerCase)
                      .collect(Collectors.joining(" "));
     }
+
+    /**
+     * Converts a word into a CommandWord enum if it matches the valid command words
+     * @param word A string to convert to an enum
+     * @return A CommandWord Enum
+     */
+    public static CommandWord fromString(String word)
+    {
+        if(word == null) {
+            return null;
+        }
+        try {
+            return CommandWord.valueOf(word.toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            return null;
+        }
+    }
 }

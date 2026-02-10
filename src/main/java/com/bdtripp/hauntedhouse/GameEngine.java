@@ -181,55 +181,23 @@ public class GameEngine
      */
     public String processCommand(Command command)
     {
-        if(command.isUnknown()) {
-            return "I don't know what you mean...";
-        }
-
-        String commandWord = command.getCommandWord();
-        if(commandWord.equals("help")) {
-            return getHelpMessage();
-        }
-        else if(commandWord.equals("go")) {
-            return goRoom(command);
-        }
-        else if(commandWord.equals("look")) {
-            return look();
-        }
-        else if(commandWord.equals("eat")) {
-            return eat(command);
-        }
-        else if(commandWord.equals("take")) {
-            return take(command);
-        }
-        else if(commandWord.equals("drop")) {
-            return drop(command);
-        }
-        else if(commandWord.equals("items")) {
-            return showItems();
-        }
-        else if(commandWord.equals("stats")) {
-            return showStats();
-        }
-        else if(commandWord.equals("talk")) {
-            return talk(command);
-        }
-        else if(commandWord.equals("give")) {
-            return giveItem(command);
-        }
-        else if(commandWord.equals("charge")) {
-            return chargeBeamer(command);
-        }
-        else if(commandWord.equals("fire")) {
-            return fireBeamer(command);
-        }
-        else if(commandWord.equals("back")) {
-            return goBack(command);
-        }
-        else if(commandWord.equals("quit")) {
-            return quit(command);
-        } else {
-            return "";
-        }
+       return switch (command.getCommandWord()) {
+            case HELP -> getHelpMessage();
+            case GO ->  goRoom(command);
+            case LOOK -> look();
+            case EAT -> eat(command);
+            case TAKE -> take(command);
+            case DROP -> drop(command);
+            case ITEMS -> showItems();
+            case STATS -> showStats();
+            case TALK -> talk(command);
+            case GIVE -> giveItem(command);
+            case CHARGE -> chargeBeamer(command);
+            case FIRE -> fireBeamer(command);
+            case BACK -> goBack(command);
+            case QUIT -> quit(command);
+            default -> "I don't know what you mean...";
+        };
     }
 
     // implementations of user commands:
@@ -245,7 +213,7 @@ public class GameEngine
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("Your command words are:").append("\n");
-        buffer.append(CommandWords.getCommandList()).append("\n\n");
+        buffer.append(CommandWord.getCommandList()).append("\n\n");
 
         buffer.append("""
             How to use the commands:

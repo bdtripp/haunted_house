@@ -1,9 +1,6 @@
 package com.bdtripp.hauntedhouse;
 
 import java.util.Scanner;
-
-import com.bdtripp.hauntedhouse.CommandWords.CommandWord;
-
 import java.io.InputStream;
 
 /**
@@ -45,7 +42,7 @@ public class Parser
     public Command getCommand()
     {
         String inputLine;   // will hold the full input line
-        String word1 = null;
+        CommandWord word1 = null;
         String word2 = null;
         String word3 = null;
 
@@ -54,7 +51,7 @@ public class Parser
         // Find up to three words on the line.
         Scanner tokenizer = new Scanner(inputLine);
         if(tokenizer.hasNext()) {
-            word1 = tokenizer.next();      // get first word
+            word1 = CommandWord.fromString(tokenizer.next());      // get first word
             if(tokenizer.hasNext()) {
                 word2 = tokenizer.next();      // get second word
                 if(tokenizer.hasNext()) {
@@ -63,13 +60,6 @@ public class Parser
             }
         }
 
-        // Now check whether this word is a valid command. If so, create a command
-        // with it. If not, create a "null" command (for unknown command).
-        if(CommandWord.isCommand(word1)) {
-            return new Command(word1, word2, word3);
-        }
-        else {
-            return new Command(null, word2, word3);
-        }
+        return new Command(word1, word2, word3);
     }
 }
