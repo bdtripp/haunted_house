@@ -30,7 +30,7 @@ public class GameService
 
     /**
      * Creates a GameEngine and returns a welcome message.
-     * @return A welcome message and status of the game
+     * @return A response containing a welcome message and status of the game
      */
     public GameResponse startGame()
     {
@@ -42,7 +42,7 @@ public class GameService
      * Parses the players input, converts it into a command, and executes it. Returns output 
      * to the GameController along with the game's status. 
      * @param request The request that came from the GameController
-     * @return A response that is handed off to the GameController
+     * @return A response containing output and status of the game that is returned to the GameController
      */
     public GameResponse execute(GameRequest request)
     {
