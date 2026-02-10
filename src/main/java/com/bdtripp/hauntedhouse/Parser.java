@@ -1,6 +1,9 @@
 package com.bdtripp.hauntedhouse;
 
 import java.util.Scanner;
+
+import com.bdtripp.hauntedhouse.CommandWords.CommandWord;
+
 import java.io.InputStream;
 
 /**
@@ -20,12 +23,10 @@ import java.io.InputStream;
  */
 public class Parser
 {
-    private CommandWords commands;  // holds all valid command words
     private Scanner reader;         // source of command input
 
     private Parser(Scanner reader) // shared constructor for both CLI and web
     {
-        commands = new CommandWords();
         this.reader = reader;
     }
 
@@ -62,9 +63,9 @@ public class Parser
             }
         }
 
-        // Now check whether this word is known. If so, create a command
+        // Now check whether this word is a valid command. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
-        if(commands.isCommand(word1)) {
+        if(CommandWord.isCommand(word1)) {
             return new Command(word1, word2, word3);
         }
         else {
