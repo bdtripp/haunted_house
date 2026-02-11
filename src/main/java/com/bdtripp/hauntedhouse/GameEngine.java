@@ -4,16 +4,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *  The GameEngine class of the Haunted House application.
- *
- *  Haunted House is a text based adventure game in which the player can
- *  explore rooms in a haunted house. The goal of the game is to try to find
- *  your way out of the house.
- * 
- *  This class contains the core logic for the game that is shared by both the
- *  web version (GameService) and the CLI version (CliRunner). It creates all
- *  the rooms, items, characters, defines the exits for each room, and processes 
- *  all Commands entered by the player.
+ *  Represents the GameEngine of the Haunted House game. Haunted House is a text based 
+ *  adventure game in which the player can explore rooms in a haunted house. The goal 
+ *  of the game is to try to find your way out of the house. This class contains the 
+ *  core logic for the game that is shared by both the web version (GameService) and the 
+ *  CLI version (CliRunner). It creates all the rooms, items, characters, defines the 
+ *  exits for each room, and processes all Commands entered by the player.
  *
  * @author  Michael Kölling, David J. Barnes, and Brian Tripp
  * @version 2026.02.05
@@ -26,7 +22,7 @@ public class GameEngine
     private boolean gameOver;
 
     /**
-     * Create the GameEngine and initialise its internal map.
+     * Creates the GameEngine and initialises a player and the rooms.
      */
     public GameEngine()
     {
@@ -119,7 +115,7 @@ public class GameEngine
     }
 
     /**
-     * Get all of the rooms
+     * Returns all of the rooms
      * @return A list of the rooms
      */
     public ArrayList<Room> getRooms() {
@@ -127,7 +123,7 @@ public class GameEngine
     }
 
     /**
-     * Get a random room in the haunted house
+     * Returns a random room in the haunted house
      * @return A random room
      */
     public Room getRandomRoom() {
@@ -160,7 +156,8 @@ public class GameEngine
     }
 
     /**
-     * Get details about the room including the items and characters that it contains
+     * Returns details about the room the player is currently in including the items and 
+     * characters that it contains.
      * @return The details about the room
      */
     public String getRoomDetails()
@@ -181,63 +178,29 @@ public class GameEngine
      */
     public String processCommand(Command command)
     {
-        if(command.isUnknown()) {
-            return "I don't know what you mean...";
-        }
-
-        String commandWord = command.getCommandWord();
-        if(commandWord.equals("help")) {
-            return getHelpMessage();
-        }
-        else if(commandWord.equals("go")) {
-            return goRoom(command);
-        }
-        else if(commandWord.equals("look")) {
-            return look();
-        }
-        else if(commandWord.equals("eat")) {
-            return eat(command);
-        }
-        else if(commandWord.equals("take")) {
-            return take(command);
-        }
-        else if(commandWord.equals("drop")) {
-            return drop(command);
-        }
-        else if(commandWord.equals("items")) {
-            return showItems();
-        }
-        else if(commandWord.equals("stats")) {
-            return showStats();
-        }
-        else if(commandWord.equals("talk")) {
-            return talk(command);
-        }
-        else if(commandWord.equals("give")) {
-            return giveItem(command);
-        }
-        else if(commandWord.equals("charge")) {
-            return chargeBeamer(command);
-        }
-        else if(commandWord.equals("fire")) {
-            return fireBeamer(command);
-        }
-        else if(commandWord.equals("back")) {
-            return goBack(command);
-        }
-        else if(commandWord.equals("quit")) {
-            return quit(command);
-        } else {
-            return "";
-        }
+       return switch (command.getCommandWord()) {
+            case HELP -> getHelpMessage();
+            case GO ->  goRoom(command);
+            case LOOK -> look();
+            case EAT -> eat(command);
+            case TAKE -> take(command);
+            case DROP -> drop(command);
+            case ITEMS -> showItems();
+            case STATS -> showStats();
+            case TALK -> talk(command);
+            case GIVE -> giveItem(command);
+            case CHARGE -> chargeBeamer(command);
+            case FIRE -> fireBeamer(command);
+            case BACK -> goBack(command);
+            case QUIT -> quit(command);
+            default -> "I don't know what you mean...";
+        };
     }
 
     // implementations of user commands:
 
     /**
-     * Get the help message.
-     * Here we get a list of the command words and directions on how to
-     * play the game.
+     * Returns a list of command words and directions on how to use them.
      * @return A help message
      */
     private String getHelpMessage()
@@ -245,7 +208,7 @@ public class GameEngine
         StringBuilder buffer = new StringBuilder();
 
         buffer.append("Your command words are:").append("\n");
-        buffer.append(CommandWords.getCommandList()).append("\n\n");
+        buffer.append(CommandWord.getCommandList()).append("\n\n");
 
         buffer.append("""
             How to use the commands:
@@ -316,10 +279,10 @@ public class GameEngine
     }
 
     /**
-     * Try to go in one direction. If there is an exit, enter
+     * Try to go in the direction provided by the command. If there is an exit, enter
      * the new room, otherwise display an error message.
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message 
      */
     private String goRoom(Command command)
     {

@@ -1,25 +1,19 @@
 package com.bdtripp.hauntedhouse;
 
 /**
- * Represents a command in the Haunted House game.
- *
- * Stores data about a command that was executed by the user.
- * A command consists of three strings: a command word, a second
- * word, and a third word (for example, if the command was "give spade Beatrice", 
- * then the three strings are "give", "spade", and "Beatrice").
- *
- * Checks the validity of each command word. If the user entered an invalid command 
- * then the command word is null.
- *
- * If the command had only one word, then the second and third words are null.
+ * Represents a command entered by a player in the Haunted House game.
+ * A command may have up to three words and are defined as a command word, a second
+ * word, and a third word. For example, if the command was "give spade Beatrice", 
+ * then the three words are "give", "spade", and "Beatrice". A command may only 
+ * have one or two words. In this case the other words would be null.
  *
  * @author  Michael Kölling and David J. Barnes, Brian Tripp
- * @version 2020.06.13
+ * @version 2026.02.10
  */
 
 public class Command
 {
-    private String commandWord;
+    private CommandWord commandWord;
     private String secondWord;
     private String thirdWord;
 
@@ -30,7 +24,7 @@ public class Command
      * @param thirdWord The third word of the command.
      *
      */
-    public Command(String firstWord, String secondWord, String thirdWord)
+    public Command(CommandWord firstWord, String secondWord, String thirdWord)
     {
         commandWord = firstWord;
         this.secondWord = secondWord;
@@ -38,11 +32,10 @@ public class Command
     }
 
     /**
-     * Return the command word (the first word) of this command. If the
-     * command was not understood, the result is null.
+     * Returns the command word (the first word) of this command.
      * @return The command word.
      */
-    public String getCommandWord()
+    public CommandWord getCommandWord()
     {
         return commandWord;
     }
@@ -82,7 +75,7 @@ public class Command
     }
 
     /**
-     * @return true if the command has a second word.
+     * @return true if the command has a third word.
      */
     public boolean hasThirdWord()
     {
