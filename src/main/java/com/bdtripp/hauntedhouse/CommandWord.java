@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * An enumeration of all command words known to the game.
+ * An enumeration of all valid commands.
  *
  * @author  Michael Kölling, David J. Barnes, and Brian Tripp
  * @version 2026.02.10
@@ -44,9 +44,9 @@ public enum CommandWord
     }
 
     /**
-     * Converts a word into a CommandWord enum if it matches the valid command words
-     * @param word A string to convert to an enum
-     * @return A CommandWord Enum
+     * Converts a string into a CommandWord if it is a valid command
+     * @param word A string to convert to a CommandWord
+     * @return The CommandWord
      */
     public static CommandWord fromString(String word)
     {

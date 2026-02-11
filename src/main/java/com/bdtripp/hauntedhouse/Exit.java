@@ -1,13 +1,10 @@
 package com.bdtripp.hauntedhouse;
 
 /**
- * Class Exit - an exit of a room
- *
- * This class is part of the Haunted House application.
- * Haunted House is a text based adventure game.
- *
- * Exits are associated with a particular room and allow the character to move from one room to the next.
- * An exit can be located at one of four directions - north, east, south, or west. Exits can be either locked or unlocked.
+ * Represents an exit in the Haunted House game. Exits are associated with a 
+ * particular room and allow the character to move from one room to the next.
+ * An exit can be located at one of four directions - north, east, south, or west. 
+ * Exits can be either locked or unlocked.
  *
  * @author Brian Tripp
  * @version 2020.06.13
@@ -18,7 +15,10 @@ public class Exit
     private Room neighbor;
     private boolean locked;
     /**
-     * Constructor for objects of class Exit
+     * Creates an exit and sets its direction, neighbor, and whether or not it is locked. 
+     * @param direction The direction of the exit.
+     * @param neighbor The neighboring room
+     * @param locked Whether or not the exit is locked
      */
     public Exit(String direction, Room neighbor, boolean locked)
     {
@@ -28,8 +28,8 @@ public class Exit
     }
 
     /**
-     * Get the room that the exit leads to
-     * @return The room that the exit leads to
+     * Returns the room that the exit leads to.
+     * @return The room.
      */
     public Room getNeighbor()
     {
@@ -37,8 +37,8 @@ public class Exit
     }
 
     /**
-     * See if the exit is locked
-     * @return True if the exit is locked
+     * Checks if the exit is locked.
+     * @return true if the exit is locked, otherwise false
      */
     public boolean isLocked()
     {
