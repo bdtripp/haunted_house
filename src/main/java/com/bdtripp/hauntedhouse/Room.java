@@ -4,14 +4,9 @@ import java.util.Set;
 import java.util.HashMap;
 import java.util.ArrayList;
 /**
- * Class Room - a room in the haunted house.
- *
- * This class is part of the Haunted House application.
- * Haunted House is a text based adventure game.
- *
- * A "Room" represents one location in the layout of the game.  It is
+ * Represents a room in the Haunted House game. It is
  * connected to other rooms via exits.  The exits are labelled north,
- * east, south, west.  For each direction, the room stores a reference
+ * south, east, and west.  For each direction, the room stores a reference
  * to the neighboring room, or null if there is no exit in that direction.
  *
  * @author  Michael Kölling, David J. Barnes, and Brian Tripp
@@ -25,10 +20,8 @@ public class Room
     private ArrayList<Character> characters;
 
     /**
-     * Create a room. Initially, it has
-     * no exits. "description" is something like "a kitchen" or
+     * @param description The room's description. Something like "a kitchen" or
      * "an open court yard".
-     * @param description The room's description.
      */
     public Room(String description)
     {
@@ -39,21 +32,28 @@ public class Room
     }
 
     /**
-     * Create an item that exists in this room
+     * Adds an item to the room
      * @param name The name of the item
      * @param description The description of the item
      * @param weight The weight of the item
      * @param isEdible The edibility of the item
-     * @param propToAffect The property the item affects
-     * @param affectValue The amount the property will be changed by
+     * @param propToAffect The property the item affects (e.g. health, strength, etc.)
+     * @param affectValue The amount the property is changed by
      */
-    public void addItem(String name, String description, int weight, boolean isEdible, String propToAffect, int affectValue)
+    public void addItem(
+        String name, 
+        String description, 
+        int weight, 
+        boolean isEdible, 
+        String propToAffect, 
+        int affectValue
+    )
     {
         items.add(new Item(name, description, weight, isEdible, propToAffect, affectValue));
     }
 
     /**
-     * Create an item that exists in this room
+     * Adds an item to the room
      * @param item The item to add
      */
     public void addItem(Item item)
@@ -62,9 +62,9 @@ public class Room
     }
 
     /**
-     * Remove an item from this room
+     * Removes an item from the room
      * @param name The name of the item to remove
-     * @return item The item that was removed
+     * @return The item that was removed
      */
     public Item removeItemFromRoom(String name)
     {
@@ -78,15 +78,20 @@ public class Room
     }
 
     /**
-     * Create a character that will exist in this room
+     * Adds a character to the room
      * @param name The name of the character
-     * @param initialDialog The initial dialog the character will speak
+     * @param initialDialog The character initial dialog
      * @param acceptanceDialog The dialog the character will speak upon accepting an item
      * @param itemSought The name of the item that the character is seeking
-     * @param itemForReward The item the character will reward a player
+     * @param itemForReward The item the character will give as a reward 
      */
-    public void addCharacter(String name, String initialDialog,
-                             String acceptanceDialog, String itemSought, Item itemForReward)
+    public void addCharacter(
+        String name, 
+        String initialDialog,
+        String acceptanceDialog, 
+        String itemSought, 
+        Item itemForReward
+    )
     {
         characters.add(new Character(
                 name,
@@ -98,10 +103,10 @@ public class Room
     }
 
     /**
-     * Define an exit from this room.
+     * Creates an exit for the room
      * @param direction The direction of the exit.
      * @param neighbor The room in the given direction.
-     * @param locked True if the door is locked
+     * @param locked true if the door is locked
      */
     public void setExit(String direction, Room neighbor, boolean locked)
     {
@@ -110,10 +115,9 @@ public class Room
     }
 
     /**
-     * Return the room that is reached if we go from this room in direction
-     * "direction." If there is no room in that direction, return null.
-     * @param direction The exit's direction.
-     * @return The room in the given direction
+     * 
+     * @param direction The direction of the neighbor
+     * @return The room in the given direction. null if there is no exit in that direction
      */
     public Room getNeighbor(String direction)
     {
@@ -124,9 +128,8 @@ public class Room
     }
 
     /**
-     * Get the exit in the direction provided
      * @param direction The direction of the exit
-     * @return The exit in the direction proved
+     * @return The exit in the direction provided
      */
     public Exit getExit(String direction)
     {
@@ -134,9 +137,7 @@ public class Room
     }
 
     /**
-     * Return a description of the room's exits,
-     * for example, "Exits: north west".
-     * @return A description of the available exits
+     * @return A description of the room's exits, for example, "Exits: north west".
      */
     public String getExitString()
     {
@@ -157,9 +158,7 @@ public class Room
     }
 
     /**
-     * Get the details about the items in this room
-     * @return Details about the items in this room such as description
-     * and weight
+     * @return Details about the items in this room such as their description and weight
      */
     public String getItemsInRoomDetails()
     {
@@ -177,9 +176,7 @@ public class Room
     }
 
     /**
-     * Get the details about the characters in this room
-     * @return Details about the characters in this room such as name
-     * and dialog
+     * @return Details about the characters in this room such as their name and dialog
      */
     public String getCharactersInRoomDetails()
     {
@@ -195,10 +192,9 @@ public class Room
     }
 
     /**
-     * Return a long desciption of this room, of the form:
-     *      You are in the kitchen.
-     *      Exits: north west
-     * @return A description of the room, including exits.
+     * @return A long desciption of this room. For example:
+     *         You are in the kitchen.
+     *         Exits: north west
      */
     public String getLongDescription()
     {
@@ -206,7 +202,6 @@ public class Room
     }
 
     /**
-     * Get the character in a room
      * @return The character that is in the room
      */
     public Character getCharacter(String name)
