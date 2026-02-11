@@ -3,13 +3,8 @@ package com.bdtripp.hauntedhouse;
 import java.util.ArrayList;
 import java.util.Stack;
 /**
- * Class Player - a player in the game.
- *
- * This class is part of the Haunted House application.
- * Haunted House is a text based adventure game.
- *
- * A "Player" represents a player in the game and keeps track of where the player is, what items they are carrying,
- * and their current stats.
+ * Represents a player in the Haunted House game. Keeps track of where the player 
+ * is, what items they are carrying, and their current stats.
  *
  * @author  Brian Tripp
  * @version 2026.02.05
@@ -28,7 +23,6 @@ public class Player
     private boolean beamerCharged;
 
     /**
-     * Constructor for objects of class Player
      * @param name The name of the player
      * @param maxCarryWeight The maximum weight the player can carry
      */
@@ -41,7 +35,6 @@ public class Player
     }
 
     /**
-     * Set whether or not the beamer is charged
      * @param value True if the beamer is charged, otherwise false
      */
     public void setBeamerCharge(boolean value) {
@@ -49,15 +42,15 @@ public class Player
     }
 
     /**
-     * Get the beamer charge
-     * @return Whether or not the beamer is charged
+     * Returns the status of the beamer charge
+     * @return true if the beamer is charged
      */
     public boolean getBeamerCharge() {
         return beamerCharged;
     }
     
     /**
-     * Set the maximum weight that the player can carry at a time
+     * @param max The maximum weight a player can carry
      */
     public void setMaxCarryWeight(int max)
     {
@@ -65,8 +58,8 @@ public class Player
     }
 
     /**
-     * Get the maximum weight that the player can carry at a time
-     * @return The maximum weight the player can carry
+     * Returns the maximum weight that the player can carry
+     * @return The maximum weight
      */
     public int getMaxCarryWeight()
     {
@@ -76,7 +69,7 @@ public class Player
     /**
      * Moves the player to the specified room
      * @param room The room to move the player to
-     * @param addToHistory True if current room should be added to history
+     * @param addToHistory true if current room should be added to history
      */
     public void moveToRoom(Room room, boolean addToHistory)
     {
@@ -95,7 +88,6 @@ public class Player
     }
 
     /**
-     * Get the history of the rooms the player has been in
      * @return The history of the rooms the player has been in
      */
     public Stack<Room> getRoomHistory()
@@ -104,7 +96,6 @@ public class Player
     }
 
     /**
-     * Get the current room
      * @return The room the player is currently in
      */
     public Room getCurrentRoom()
@@ -113,7 +104,7 @@ public class Player
     }
 
     /**
-     * Gets the previous room and removes it from the room history
+     * Returns the previous room and removes it from the room history
      * @return The previous room
      */
     public Room getPreviousRoom()
@@ -147,8 +138,8 @@ public class Player
     }
 
     /**
-     * Get the weight of the items that the player is currently carrying
-     * @return The total weight of the items
+     *
+     * @return The weight of the items that the player is currently carrying
      */
     public int getCurrentCarryWeight()
     {
@@ -160,7 +151,6 @@ public class Player
     }
 
     /**
-     * Get the items the player is currently carrying
      * @return The items the player is carrying
      */
     public ArrayList<Item> getItems()
@@ -169,10 +159,9 @@ public class Player
     }
 
     /**
-     * Get an item the player is currently carrying
+     * Returns an item that the player is carrying
      * @param name The name of the item
-     * @return The item with the specified name, or null if the player is not
-     * carrying an item with that name
+     * @return The item 
      */
     public Item getItem(String name)
     {
@@ -185,8 +174,8 @@ public class Player
     }
 
     /**
-     * See if the player has the key
-     * @return True if the player has the key
+     * Checks if the player has the key
+     * @return true if the player has the key
      */
     public boolean hasKey()
     {
@@ -198,8 +187,7 @@ public class Player
         return false;
     }
     /**
-     * Get the details of the items that the player is carrying
-     * @return The details of each item
+     * @return The details of the items that the player is carrying
      */
     public String getCurrentItemDetails()
     {
@@ -217,7 +205,6 @@ public class Player
     }
 
     /**
-     * Get the players current stats
      * @return The players stats
      */
     public String getStats() {
@@ -229,8 +216,7 @@ public class Player
     }
 
     /**
-     * Get the number of moves that a player has left
-     * @return The number of moves left
+     * @return The number of moves a player has left
      */
     public int getMovesLeft()
     {
@@ -246,8 +232,7 @@ public class Player
     }
 
     /**
-     * Gets the location of the last beamer charge
-     * @return The beamer location
+     * @return The location of the last beamer charge
      */
     public Room getBeamerLocation()
     {
@@ -255,9 +240,9 @@ public class Player
     }
 
     /**
-     * Ingest an item
+     * Makes a player ingest an item
      * @param item The item to ingest
-     * @return A message to display when the item is ingested
+     * @return A message to display
      */
     public String ingest(Item item) {
         String propToAffect = item.getPropToAffect();
@@ -277,16 +262,16 @@ public class Player
     }
 
     /**
-     * Set the health value of the player
-     * @param value The value to set health to
+     * Set the health of the player
+     * @param value The value to set
      */
     public void setHealth(int value) {
         health = value;
     }
 
     /**
-     * Set the strength value of the player
-     * @param value The value to set strength to
+     * Set the strength of the player
+     * @param value The value to set
      */
     public void setStrength(int value) {
         strength = value;

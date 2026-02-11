@@ -4,40 +4,44 @@ import java.util.Scanner;
 import java.io.InputStream;
 
 /**
- * The Parser class of the Haunted House application.
- *
- * This parser reads user input and tries to interpret it as a
- * command. Every time it is called it reads a line from the terminal and
- * tries to interpret the line as a three word command. It returns the command
- * as an object of class Command.
- *
- * The parser has a set of known command words. It checks user input against
- * the known commands, and if the input is not one of the known commands, it
- * returns a command object that is marked as an unknown command.
+ * Represents a parser in the Haunted House game. The parser tokenizes user input
+ * into commands and arguments.
  *
  * @author  Michael Kölling, David J. Barnes, and Brian Tripp
  * @version 2026.02.06
  */
 public class Parser
 {
-    private Scanner reader;         // source of command input
+    private Scanner reader;
 
-    private Parser(Scanner reader) // shared constructor for both CLI and web
+    /**
+     * For both CLI and web version of the game.
+     * @param reader The scanner to tokenize input
+     */
+    private Parser(Scanner reader) 
     {
         this.reader = reader;
     }
 
-    public Parser(String string) {  // for the Web application
+    /**
+     * For the Web application
+     * @param string The input to tokenize
+     */
+    public Parser(String string) { 
         this(new Scanner(string));
     }
 
-    public Parser(InputStream inputStream) // for the CLI application
+    /**
+     * For the CLI application
+     * @param inputStream The input stream to tokenize
+     */
+    public Parser(InputStream inputStream) 
     {
         this(new Scanner(inputStream));
     }
 
-    /**
-     * @return The next command from the user.
+    /** Returns a tokenized version of the command that was entered by the player 
+     * @return The command
      */
     public Command getCommand()
     {
@@ -48,12 +52,12 @@ public class Parser
 
         inputLine = reader.nextLine();
 
-        // Find up to three words on the line.
+        // Find up to three words
         Scanner tokenizer = new Scanner(inputLine);
         if(tokenizer.hasNext()) {
-            word1 = CommandWord.fromString(tokenizer.next());      // get first word
+            word1 = CommandWord.fromString(tokenizer.next());
             if(tokenizer.hasNext()) {
-                word2 = tokenizer.next();      // get second word
+                word2 = tokenizer.next();
                 if(tokenizer.hasNext()) {
                     word3 = tokenizer.next();
                 }
