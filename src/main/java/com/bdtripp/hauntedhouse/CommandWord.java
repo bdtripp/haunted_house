@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * An enumeration of all valid commands.
+ * An enumeration of all valid commands in the Haunted House application.
  *
  * @author  Michael Kölling, David J. Barnes, and Brian Tripp
  * @version 2026.02.10

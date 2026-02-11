@@ -338,7 +338,7 @@ public class GameEngine
     }
 
     /**
-     * Makes the player eat which reduces their hunger
+     * Makes the player eat an item if it is edible
      * @param command The command that was entered
      * @return A message to display
      */
@@ -398,7 +398,7 @@ public class GameEngine
                 player.getMaxCarryWeight()) {
             return "It's too heavy! You can carry up to " +
                     player.getMaxCarryWeight() + " units. Maybe if you dropped \n" +
-                    "some items you could manage it. Or perhaps it's simply too heavy.";
+                    "some items you could manage it. Or it may be simply too heavy.";
         }
         else {
             player.takeItem(itemToTake);
@@ -407,9 +407,9 @@ public class GameEngine
     }
 
     /**
-     * Player drops an item so they no longer have to carry it
+     * Makes a player drop an item so they no longer have to carry it
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     private String drop(Command command)
     {
@@ -430,9 +430,9 @@ public class GameEngine
     }
 
     /**
-     * Get details about all of the items that the player is
+     * Returns a message about all of the items that the player is
      * currently carrying
-     * @return A message about the items the player is carrying
+     * @return A message to display
      */
     private String showItems()
     {
@@ -440,8 +440,8 @@ public class GameEngine
     }
 
     /**
-     * Get the players current stats
-     * @return A message about the players current stats
+     * Returns the players current stats
+     * @return A message to display
      */
     private String showStats()
     {
@@ -449,9 +449,9 @@ public class GameEngine
     }
 
     /**
-     * Talk a character
+     * Makes a play talk to a character
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     public String talk(Command command)
     {
@@ -471,9 +471,9 @@ public class GameEngine
     }
 
     /**
-     * Gives the item to the specified character
+     * Makes the player give an item to a character
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     public String giveItem(Command command)
     {
@@ -518,7 +518,7 @@ public class GameEngine
      * Charges the beamer. The beamer memorizes the location of the players
      * current room.
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     private String chargeBeamer(Command command)
     {
@@ -542,7 +542,7 @@ public class GameEngine
      * Fires the beamer. Returns the player to the location at which the
      * beamer was last charged.
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     private String fireBeamer(Command command)
     {
@@ -567,10 +567,10 @@ public class GameEngine
     }
 
     /**
-     * "Back" was entered. Takes the player back to the previous room they
+     * Takes the player back to the previous room they
      * were in.
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     private String goBack(Command command)
     {
@@ -586,14 +586,14 @@ public class GameEngine
     }
 
     /**
-     * "Quit" was entered. Check the rest of the command to see
+     * Check the rest of the command to see
      * whether we really quit the game.
      * @return A message to display in the console
      */
     private String quit(Command command)
     {
         if(command.hasSecondWord()) {
-            return "Quit what?";
+            return "Enter \"quit\" (with nothing else after it) to quit the game.";
         }
         else {
             endGame();

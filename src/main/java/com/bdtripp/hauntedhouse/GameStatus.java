@@ -1,7 +1,7 @@
 package com.bdtripp.hauntedhouse;
 
 /**
- * The GameStatus enum of the Haunted House application.
+ * Represents the GameStatus of the Haunted House game.
  * 
  * Enumerates all the possible game states.
  * @author  Brian Tripp

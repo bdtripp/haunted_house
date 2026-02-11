@@ -1,7 +1,7 @@
 package com.bdtripp.hauntedhouse.api;
 
 /**
- *  The GameRequest class of the Haunted House application.
+ *   Represents a GameRequest in the Haunted House game.
  * 
  *  A GameRequest is created when player input is received by the 
  *  GameController

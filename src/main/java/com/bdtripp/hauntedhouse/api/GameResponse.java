@@ -3,7 +3,7 @@ package com.bdtripp.hauntedhouse.api;
 import com.bdtripp.hauntedhouse.GameStatus;
 
 /**
- *  The GameResponse class of the Haunted House application.
+ *   Represents a GameResponse in the Haunted House game.
  * 
  *  A GameResponse is created by the GameService and contains
  *  output from the GameEngine and the game's current status.
