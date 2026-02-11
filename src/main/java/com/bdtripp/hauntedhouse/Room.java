@@ -115,7 +115,7 @@ public class Room
      * @param direction The exit's direction.
      * @return The room in the given direction
      */
-    public Room getExitNeighbor(String direction)
+    public Room getNeighbor(String direction)
     {
         if (exits.containsKey(direction)) {
             return exits.get(direction).getNeighbor();

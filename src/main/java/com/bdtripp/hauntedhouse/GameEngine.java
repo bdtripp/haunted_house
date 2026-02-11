@@ -279,8 +279,8 @@ public class GameEngine
     }
 
     /**
-     * Try to go in the direction provided by the command. If there is an exit, enter
-     * the new room, otherwise display an error message.
+     * If there is an exit in the direction provided by the command, the player takes that exit and enters
+     * the neighboring room. 
      * @param command The command that was entered
      * @return A message 
      */
@@ -289,13 +289,12 @@ public class GameEngine
         StringBuilder buffer = new StringBuilder();
 
         if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
             return "Go where?";
         }
 
         String direction = command.getSecondWord();
         Room currentRoom = player.getCurrentRoom();
-        Room nextRoom = currentRoom.getExitNeighbor(direction);
+        Room nextRoom = currentRoom.getNeighbor(direction);
 
         if(nextRoom == null) {
             return "There is no door!";
@@ -303,8 +302,6 @@ public class GameEngine
         else if(currentRoom.getExit(direction).isLocked()) {
             if(player.hasKey()) {
                 buffer.append("The door is locked...but you have the key!").append("\n");
-                buffer.append(enterRoom(nextRoom, true));
-                return buffer.toString();
             }
             else {
                 return "The door is locked...you need to find the key!";
@@ -315,12 +312,12 @@ public class GameEngine
                 endGame();
                 return "You ran out of moves! Game Over...";
             }
-            return enterRoom(nextRoom, true);
         }
+        return buffer.append(enterRoom(nextRoom, true)).toString();
     }
 
     /**
-     * Enters the specified room and prints the description
+     * Moves the player to the specified room and returns details about the room
      * @param nextRoom The room to move to
      * @param addToHistory True if the current room should be added to history
      * @return The details about the room
@@ -332,8 +329,8 @@ public class GameEngine
     }
 
     /**
-     * Get information about the current location
-     * @return A message about the current location
+     * Returns a message about the current location
+     * @return A message to display
      */
     private String look()
     {
@@ -341,9 +338,9 @@ public class GameEngine
     }
 
     /**
-     * Eat some food to reduce hunger
+     * Makes the player eat which reduces their hunger
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     private String eat(Command command)
     {
@@ -358,7 +355,7 @@ public class GameEngine
             return "That item doesn't exist.";
         }
         else if(!itemToEat.isEdible()) {
-            return "You can't eat that...";
+            return "Don't eat that!";
         }
         else {
             return player.ingest(itemToEat);
@@ -366,14 +363,14 @@ public class GameEngine
     }
 
     /**
-     * End the game.
+     * Ends the game.
      */
     private void endGame() {
         gameOver = true;
     }
 
     /**
-     * Check if the game is over
+     * Checks if the game is over
      * @return true if the game is over, false otherwise
      */
     public boolean isGameOver() {
@@ -381,9 +378,9 @@ public class GameEngine
     }
 
     /**
-     * Player picks up an item to carry with them
+     * Makes a player pick up an item to carry with them
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     private String take(Command command)
     {
