@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const inputLabel = document.querySelector('label[for="terminal-input"');
+    const prompt = document.querySelector('#prompt');
     const input = document.querySelector('#terminal-input');
     const outputElement = document.querySelector('#output');
     const newGameBtn = document.querySelector('#new-game-btn');
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const startGame = async () => {
         input.disabled = false;
-        inputLabel.style.display = 'initial';
+        prompt.style.display = 'initial';
         const response = await fetch('api/game/start', {
             method: 'POST'
         });
@@ -42,8 +42,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (data.status === STATUS.STOPPED) {
                 outputElement.textContent += 'Click "New Game" to play again!';
                 input.disabled = true;
-                inputLabel.style.display = 'none';
-                console.log(inputLabel);
+                prompt.style.display = 'none';
+                console.log(prompt);
             }
         }
     });
