@@ -279,8 +279,8 @@ public class GameEngine
     }
 
     /**
-     * Try to go in the direction provided by the command. If there is an exit, enter
-     * the new room, otherwise display an error message.
+     * If there is an exit in the direction provided by the command, the player takes that exit and enters
+     * the neighboring room. 
      * @param command The command that was entered
      * @return A message 
      */
@@ -289,13 +289,12 @@ public class GameEngine
         StringBuilder buffer = new StringBuilder();
 
         if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
             return "Go where?";
         }
 
         String direction = command.getSecondWord();
         Room currentRoom = player.getCurrentRoom();
-        Room nextRoom = currentRoom.getExitNeighbor(direction);
+        Room nextRoom = currentRoom.getNeighbor(direction);
 
         if(nextRoom == null) {
             return "There is no door!";
@@ -303,8 +302,6 @@ public class GameEngine
         else if(currentRoom.getExit(direction).isLocked()) {
             if(player.hasKey()) {
                 buffer.append("The door is locked...but you have the key!").append("\n");
-                buffer.append(enterRoom(nextRoom, true));
-                return buffer.toString();
             }
             else {
                 return "The door is locked...you need to find the key!";
@@ -315,12 +312,12 @@ public class GameEngine
                 endGame();
                 return "You ran out of moves! Game Over...";
             }
-            return enterRoom(nextRoom, true);
         }
+        return buffer.append(enterRoom(nextRoom, true)).toString();
     }
 
     /**
-     * Enters the specified room and prints the description
+     * Moves the player to the specified room and returns details about the room
      * @param nextRoom The room to move to
      * @param addToHistory True if the current room should be added to history
      * @return The details about the room
@@ -332,8 +329,8 @@ public class GameEngine
     }
 
     /**
-     * Get information about the current location
-     * @return A message about the current location
+     * Returns a message about the current location
+     * @return A message to display
      */
     private String look()
     {
@@ -341,9 +338,9 @@ public class GameEngine
     }
 
     /**
-     * Eat some food to reduce hunger
+     * Makes the player eat an item if it is edible
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     private String eat(Command command)
     {
@@ -358,7 +355,7 @@ public class GameEngine
             return "That item doesn't exist.";
         }
         else if(!itemToEat.isEdible()) {
-            return "You can't eat that...";
+            return "Don't eat that!";
         }
         else {
             return player.ingest(itemToEat);
@@ -366,14 +363,14 @@ public class GameEngine
     }
 
     /**
-     * End the game.
+     * Ends the game.
      */
     private void endGame() {
         gameOver = true;
     }
 
     /**
-     * Check if the game is over
+     * Checks if the game is over
      * @return true if the game is over, false otherwise
      */
     public boolean isGameOver() {
@@ -381,9 +378,9 @@ public class GameEngine
     }
 
     /**
-     * Player picks up an item to carry with them
+     * Makes a player pick up an item to carry with them
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     private String take(Command command)
     {
@@ -401,7 +398,7 @@ public class GameEngine
                 player.getMaxCarryWeight()) {
             return "It's too heavy! You can carry up to " +
                     player.getMaxCarryWeight() + " units. Maybe if you dropped \n" +
-                    "some items you could manage it. Or perhaps it's simply too heavy.";
+                    "some items you could manage it. Or it may be simply too heavy.";
         }
         else {
             player.takeItem(itemToTake);
@@ -410,9 +407,9 @@ public class GameEngine
     }
 
     /**
-     * Player drops an item so they no longer have to carry it
+     * Makes a player drop an item so they no longer have to carry it
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     private String drop(Command command)
     {
@@ -433,9 +430,9 @@ public class GameEngine
     }
 
     /**
-     * Get details about all of the items that the player is
+     * Returns a message about all of the items that the player is
      * currently carrying
-     * @return A message about the items the player is carrying
+     * @return A message to display
      */
     private String showItems()
     {
@@ -443,8 +440,8 @@ public class GameEngine
     }
 
     /**
-     * Get the players current stats
-     * @return A message about the players current stats
+     * Returns the players current stats
+     * @return A message to display
      */
     private String showStats()
     {
@@ -452,9 +449,9 @@ public class GameEngine
     }
 
     /**
-     * Talk a character
+     * Makes a play talk to a character
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     public String talk(Command command)
     {
@@ -474,9 +471,9 @@ public class GameEngine
     }
 
     /**
-     * Gives the item to the specified character
+     * Makes the player give an item to a character
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     public String giveItem(Command command)
     {
@@ -521,7 +518,7 @@ public class GameEngine
      * Charges the beamer. The beamer memorizes the location of the players
      * current room.
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     private String chargeBeamer(Command command)
     {
@@ -545,7 +542,7 @@ public class GameEngine
      * Fires the beamer. Returns the player to the location at which the
      * beamer was last charged.
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     private String fireBeamer(Command command)
     {
@@ -570,10 +567,10 @@ public class GameEngine
     }
 
     /**
-     * "Back" was entered. Takes the player back to the previous room they
+     * Takes the player back to the previous room they
      * were in.
      * @param command The command that was entered
-     * @return A message to display in the console
+     * @return A message to display
      */
     private String goBack(Command command)
     {
@@ -589,14 +586,14 @@ public class GameEngine
     }
 
     /**
-     * "Quit" was entered. Check the rest of the command to see
+     * Check the rest of the command to see
      * whether we really quit the game.
      * @return A message to display in the console
      */
     private String quit(Command command)
     {
         if(command.hasSecondWord()) {
-            return "Quit what?";
+            return "Enter \"quit\" (with nothing else after it) to quit the game.";
         }
         else {
             endGame();

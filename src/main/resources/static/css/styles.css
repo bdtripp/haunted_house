@@ -9,8 +9,8 @@ main {
     grid-template-columns: minmax(200px, 800px);
     justify-content: center;
     gap: 40px;
-    margin: 40px;
-    font-family: "JetBrains Mono", monospace;
+    margin: 20px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 h1 {
@@ -19,7 +19,7 @@ h1 {
 
 div#terminal {
     background-color: black;
-    color: white;
+    color: #33ff33;
     height: 400px;
     display: grid;
     padding: 10px;
@@ -42,11 +42,31 @@ input#terminal-input {
     width: 100%;
 }
 
+input#terminal-input:focus {
+    width: initial;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    min-width: 0;
+}
+
+#cursor {
+    width: 10px;
+    height: 1.2em;
+    background-color: #33ff33;
+}
+
 button#new-game-btn {
     justify-self: center;
     padding: 20px;
     font-size: 1.5em;
     letter-spacing: 2px;
     cursor: pointer;
+}
+
+@media (min-width: 500px) {
+    main {
+
+    }
 }
 
