@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    const terminal = document.querySelector('#terminal');
     const prompt = document.querySelector('#prompt');
     const input = document.querySelector('#terminal-input');
+    const cursor = document.querySelector('#cursor');
     const outputElement = document.querySelector('#output');
     const newGameBtn = document.querySelector('#new-game-btn');
     const STATUS = {
@@ -20,14 +22,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     startGame();
 
+    const moveCursorToEnd = () => {
+        const range = document.createRange();
+        const sel = window.getSelection();
+
+        range.selectNodeContents(input);
+        range.collapse(false); // collapse to end
+        sel.removeAllRanges();
+        sel.addRange(range);
+    };
+
+    terminal.addEventListener('click', () => {
+        input.focus();
+        moveCursorToEnd();
+    });
+
+    input.addEventListener("focus", () => {
+        moveCursorToEnd();
+    });
+
     input.addEventListener('keydown', async (e) => {
-        const terminal = document.querySelector('#terminal');
 
         if (e.key === 'Enter') {
             const response = await fetch('/api/game/command', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 'input': e.target.value }),
+                body: JSON.stringify({ 'input': e.target.textContent }),
             });
 
             if (!response.ok) {
@@ -38,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             outputElement.textContent += data.output;
             terminal.scrollTop = terminal.scrollHeight;
-            input.value = '';
+            input.textContent = '';
             if (data.status === STATUS.STOPPED) {
                 outputElement.textContent += 'Click "New Game" to play again!';
                 input.disabled = true;

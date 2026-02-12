@@ -17,7 +17,7 @@ h1 {
     text-align: center;
 }
 
-div#terminal {
+#terminal {
     background-color: black;
     color: #33ff33;
     height: 400px;
@@ -32,30 +32,29 @@ div#terminal {
     white-space: pre-line;
 }
 
-div#input-area {
+#input-area {
     display: flex;
     align-items: start;
 }
 
-input#terminal-input {
+#terminal-input {
     all: unset; /* wipe most browser styles */
-    width: 100%;
-}
-
-input#terminal-input:focus {
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: auto;
-    min-width: 0;
+    flex: 0 1 auto;
+    caret-color: transparent;
 }
 
 #cursor {
     width: 10px;
     height: 1.2em;
     background-color: #33ff33;
+    opacity: .5;
 }
 
-button#new-game-btn {
+#input-area:focus-within #cursor {
+    opacity: 1;
+}
+
+#new-game-btn {
     justify-self: center;
     padding: 20px;
     font-size: 1.5em;
