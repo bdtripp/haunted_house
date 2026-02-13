@@ -10,7 +10,7 @@ main {
     justify-content: center;
     gap: 40px;
     margin: 20px;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Cascadia Mono', monospace;
 }
 
 h1 {
@@ -52,6 +52,7 @@ h1 {
 
 #input-area:focus-within #cursor {
     opacity: 1;
+    animation: blink 1.4s step-end infinite;
 }
 
 #new-game-btn {
@@ -66,5 +67,10 @@ h1 {
     main {
 
     }
+}
+
+@keyframes blink {
+    0% {opacity : 0;}
+    50% {opacity : 1;}
 }
 
