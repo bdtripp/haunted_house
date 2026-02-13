@@ -9,6 +9,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         RUNNING: 'RUNNING',
         STOPPED: 'STOPPED'
     };
+    
+    let buffer = input.innerText;
+    let cursorPosition = buffer.length - 1;
+
+    function renderInput() {
+        Array.from(buffer).forEach((char, index) => {
+            let span = document.createElement('span');
+            span.textContent = char;
+            if (index === cursorPosition) {
+                span.className = 'inverted';
+            }
+            input.appendChild(span);
+        });
+    }
 
     const startGame = async () => {
         input.disabled = false;
@@ -58,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             outputElement.textContent += data.output;
             terminal.scrollTop = terminal.scrollHeight;
-            input.textContent = '';
+            input.innerText = '';
             if (data.status === STATUS.STOPPED) {
                 outputElement.textContent += 'Click "New Game" to play again!';
                 input.disabled = true;
