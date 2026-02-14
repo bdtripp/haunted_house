@@ -10,6 +10,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         STOPPED: 'STOPPED'
     };
 
+    function renderInput() {
+        let buffer = input.innerText;
+        let cursorPosition = buffer.length - 1;
+        input.innerText = '';
+
+        Array.from(buffer).forEach((char, index) => {
+            let span = document.createElement('span');
+            span.textContent = char;
+            if (index === cursorPosition) {
+                span.className = 'inverted';
+            }
+            input.appendChild(span);
+        });
+    }
+
     const startGame = async () => {
         input.disabled = false;
         prompt.style.display = 'initial';
@@ -42,6 +57,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     input.addEventListener('keydown', async (e) => {
+        if(e.key.length === 1) {
+            input.innerText = e.key;
+            renderInput();
+            e.preventDefault;
+        }
 
         if (e.key === 'Enter') {
             const response = await fetch('/api/game/command', {
@@ -58,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             outputElement.textContent += data.output;
             terminal.scrollTop = terminal.scrollHeight;
-            input.textContent = '';
+            input.innerText = '';
             if (data.status === STATUS.STOPPED) {
                 outputElement.textContent += 'Click "New Game" to play again!';
                 input.disabled = true;
